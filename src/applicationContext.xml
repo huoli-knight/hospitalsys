@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xml-boday>
 <beans
     xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -65,4 +64,5 @@
 	<!-- 往spring容器中装配service的bean -->
 	<bean id="loginService" class="com.localhost.model.service.LoginServiceImpl"></bean>
 	<bean id="constantService" class="com.localhost.model.service.ConstantServiceImpl"></bean>
-</beans></xml-boday>
+	<bean id="doctorCategoryService" class="com.localhost.model.service.DoctorCategoryServiceImpl"></bean>
+</beans>

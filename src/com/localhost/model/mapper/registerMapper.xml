@@ -22,6 +22,26 @@
     <result column="RegisterID" jdbcType="INTEGER" property="registerid" />
     <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
   </resultMap>
+  
+  <select id="getSeekingDoctor" resultMap="BaseResultMap">
+  	select r.ID,r.RealName
+  	from register r
+  	where r.ID in (select m.RegistID 
+  					from medicalrecord m
+  					where m.CaseState in (2,3))
+  </select>
+  
+  <select id="getNoSeekingDoctor" resultMap="BaseResultMap">
+  select r.ID,r.RealName
+  	from register r
+  	where r.ID in (select m.RegistID 
+  					from medicalrecord m
+  					where m.CaseState in (1))
+  		or r.ID not in (select m.RegistID 
+  					from medicalrecord m)
+  
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.register">
     insert into register (ID, CaseNumber, RealName, 
       Gender, IDnumber, BirthDate, 
