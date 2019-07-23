@@ -6,4 +6,6 @@ public interface medicalrecordMapper {
     int insert(medicalrecord record);
 
     int insertSelective(medicalrecord record);
+    
+    public medicalrecord getPatientData(int id);
 }

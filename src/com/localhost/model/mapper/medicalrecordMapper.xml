@@ -18,6 +18,13 @@
     <result column="Handling" jdbcType="VARCHAR" property="handling" />
     <result column="CaseState" jdbcType="INTEGER" property="casestate" />
   </resultMap>
+  
+  <select id="getPatientData" parameterType="int" resultMap="BaseResultMap">
+  	select *
+  	from medicalrecord
+  	where RegistID = #{RegistID}
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.medicalrecord">
     insert into medicalrecord (ID, CaseNumber, RegistID, 
       Readme, Present, PresentTreat, 

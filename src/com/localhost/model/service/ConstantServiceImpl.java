@@ -40,10 +40,11 @@ public class ConstantServiceImpl implements ConstantService{
 	}
 
 	@Override
-	public String delete(String[] selectData) {
+	public String delete(List<String> selectData) {
 		int deleteNumber = 0;
-		for (int i = 0; i < selectData.length; i++) {
-			if (constantItemMapper.deleteData(Integer.valueOf(selectData[i])) != 0) {
+		for (int i = 0; i < selectData.size(); i++) {
+			int num = Integer.parseInt(selectData.get(i));
+			if (constantItemMapper.deleteData(num) != 0) {
 				deleteNumber++;
 			}
 		}

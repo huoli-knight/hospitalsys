@@ -9,7 +9,7 @@
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
   
-  <delete id="deleteData" parameterType="INTEGER">
+  <delete id="deleteData" parameterType="int">
   		delete
   		from constantitem
   		where ID = #{ID}
