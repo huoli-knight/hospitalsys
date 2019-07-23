@@ -1,6 +1,9 @@
 package com.localhost.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,8 +68,18 @@ public class ConstantController {
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@Jurisdiction(jurisdiction = 1)
-	public @ResponseBody String delete(String[] selectData) {
+	public @ResponseBody String delete(HttpServletRequest request) {
 		String result = "true";
+		String number = request.getParameter("number");
+		List<String> selectData = new ArrayList<>();
+		String key1 = "key";
+		String key = "";
+		String a = "";
+		for (int i = 0; i < Integer.parseInt(number); i++) {
+			key = key1 + i;
+			a = request.getParameter(key);
+			selectData.add(request.getParameter(key));
+		}
 		result = constantService.delete(selectData);
 		return "{\"result\":" + result + "}";
 	}
@@ -92,6 +105,6 @@ public class ConstantController {
 	public @ResponseBody String addConstant(String constantName, String constantCode, String constantTypeName) {
 		Integer result = 1;
 		result = constantService.addConstant(constantName, constantCode, constantTypeName);
-		return "{\"result\":" + result + "}";
+		return "{\"result\":\"" + result + "\"}";
 	}
 }

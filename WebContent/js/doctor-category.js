@@ -1,5 +1,5 @@
 $(function(){
-	
+	var q_treeNode;
 	var setting = {
 			view: {
 				dblClickExpand: false,
@@ -17,30 +17,19 @@ $(function(){
 			callback: {
 				beforeClick: function(treeId, treeNode) {
 					var zTree = $.fn.zTree.getZTreeObj("tree");
+					console.log(treeNode);
+					q_treeNode = treeNode;
+					$("#tree_id").val(treeNode.id);
 					if (treeNode.isParent) {
 						zTree.expandNode(treeNode);
 						return false;
 					} else {
-						demoIframe.attr("src",treeNode.file + ".html");
+						demoIframe.attr("src",treeNode.file + ".html?id=1");
 						return true;
 					}
 				}
 			}
 		};
-	
-//	var zNodes =[
-//		{ id:1, pId:0, name:"一级分类", open:true},
-//		{ id:11, pId:1, name:"未诊患者", open:true},
-//		{ id:111, pId:11, name:"张三", file:"system-base"},
-//		{ id:112, pId:11, name:"李四", file:"system-base"},
-//		{ id:113, pId:11, name:"王五", file:"system-base"},
-//		{ id:114, pId:11, name:"赵六", file:"system-base"},
-//		{ id:115, pId:11, name:"耿七", file:"system-base"},
-//		{ id:12, pId:1, name:"已诊患者"},
-//		{ id:121, pId:12, name:"张龙", file:"system-base"},
-//		{ id:122, pId:12, name:"赵虎", file:"system-base"},
-//	];
-
 	
 	var zNodes =[];
 	zNodes[0] =	{ id:1, pId:0, name:"一级分类", open:true};

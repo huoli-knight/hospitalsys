@@ -71,13 +71,19 @@ $(function() {
 	
 	$("#delete").click(function() {
 		var selectAll = document.getElementsByName("selectData");
-		var selectData = new Array();
+		var selectData = {};
+		var key = "key";
+		var i = 0;
+		var state = key + i;
 		for (data in selectAll) {
 			if (selectAll[data].checked) {
-				selectData.push(selectAll[data].value);
+				selectData[state] = selectAll[data].value;
+				i++;
+				state = key + i;
 			}
 		}
-		if (selectData.length == 0) {
+		selectData["number"] = i;
+		if (selectData.length == 1) {
 			$("#tips").html("请选择数据！");
 			return;
 		}
@@ -94,9 +100,7 @@ $(function() {
 			url:"constant/delete",
 			dataType:"json",
 			async:true,
-			data: {
-				selectData:selectData
-			},
+			data: selectData,
 			beforeSend: function(){
 				$("#tips").html("正在处理，请稍后...");
 				$("#delete").attr({ disabled: "disabled" });
@@ -209,7 +213,7 @@ $(function() {
 		$.ajax({
 			type:"post",
 			url:"constant/addConstant",
-			datatype:"json",
+			dataType:"json",
 			async:true,
 			data:{
 				constantName:constantName,
@@ -221,15 +225,17 @@ $(function() {
 				$("#submit").attr({ disabled: "disabled" });
 			},
 			success:function(data) {
-				if(data.result == 1) {
+				console.log(data);
+				alert(data.result);
+				if(data.result == '1') {
 					$("#tips").html("添加成功！");
 					$("#addTips").html("");
 					$("#popUp").css("display","none");
 				}
-				else if (data.result == 0) {
+				else if (data.result == "0") {
 					$("#addTips").html("类别名称不存在！！！");
 				}
-				else if (data.result == -1) {
+				else if (data.result == "-1") {
 					$("#addTips").html("添加失败！请重试！");
 				}
 				else {
