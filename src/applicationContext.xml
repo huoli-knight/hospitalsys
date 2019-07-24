@@ -66,4 +66,5 @@
 	<bean id="loginService" class="com.localhost.model.service.LoginServiceImpl"></bean>
 	<bean id="constantService" class="com.localhost.model.service.ConstantServiceImpl"></bean>
 	<bean id="doctorCategoryService" class="com.localhost.model.service.DoctorCategoryServiceImpl"></bean>
+	<bean id="doctorSystemBaseServiceImpl.java" class="com.localhost.model.service.DoctorSystemBaseServiceImpl"></bean>
 </beans>

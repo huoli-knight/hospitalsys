@@ -83,7 +83,7 @@ $(function() {
 			}
 		}
 		selectData["number"] = i;
-		if (selectData.length == 1) {
+		if (selectData.number == 0) {
 			$("#tips").html("请选择数据！");
 			return;
 		}

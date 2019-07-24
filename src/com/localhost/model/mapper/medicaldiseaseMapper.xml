@@ -10,11 +10,37 @@
     <result column="GetSiskDate" jdbcType="TIMESTAMP" property="getsiskdate" />
     <result column="DiagnoseCate" jdbcType="INTEGER" property="diagnosecate" />
   </resultMap>
-  <insert id="insert" parameterType="com.localhost.model.po.medicaldisease">
-    insert into medicaldisease (ID, MedicalID, RegistID, 
+    
+  <delete id="deleteDieaseId" parameterType="int">
+  	delete
+  	from medicalrecord mr
+  	where mr.DiseaseID in (select ID
+  							from disease d
+  							where d.DiseaseICD = #{icd})
+  		and mr.RegistID = #{diseaseId}
+  	</delete>
+  
+  <select id="getMedicalTime" parameterType="int" resultMap="BaseResultMap">
+  	select md.DiseaseID,md.GetSiskDate
+  	from medicaldisease md
+  	where md.RegistID = #{ID}
+  </select>
+  
+  <select id="getDiagnosisType" parameterType="int" resultType="int">
+	SELECT
+		AVG(md.DiagnoseCate)
+	FROM
+		medicaldisease md
+	WHERE
+		md.RegistID = #{ID}
+  </select>
+
+  
+  <insert id="insert" parameterType="com.localhost.model.po.medicaldisease" keyProperty="ID" useGeneratedKeys="true">
+    insert into medicaldisease (MedicalID, RegistID, 
       DiseaseID, DiagnoseType, GetSiskDate, 
       DiagnoseCate)
-    values (#{id,jdbcType=INTEGER}, #{medicalid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, 
+    values (#{medicalid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, 
       #{diseaseid,jdbcType=INTEGER}, #{diagnosetype,jdbcType=INTEGER}, #{getsiskdate,jdbcType=TIMESTAMP}, 
       #{diagnosecate,jdbcType=INTEGER})
   </insert>
