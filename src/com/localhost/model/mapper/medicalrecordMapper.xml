@@ -19,32 +19,54 @@
     <result column="CaseState" jdbcType="INTEGER" property="casestate" />
   </resultMap>
   
+  <select id="getData" parameterType="int" resultMap="BaseResultMap">
+  	select *
+  	from medicalrecord
+  	where RegistID = # {ID}
+  </select>
+  
+  <select id="getDieaseState" parameterType="int" resultType="int">
+  	select CaseState
+  	from medicalrecord
+  	where RegistID = #{ID}
+  </select>
+  
   <select id="getPatientData" parameterType="int" resultMap="BaseResultMap">
   	select *
   	from medicalrecord
-  	where RegistID = #{RegistID}
+  	where RegistID = #{ID}
   </select>
   
-  <insert id="insert" parameterType="com.localhost.model.po.medicalrecord">
-    insert into medicalrecord (ID, CaseNumber, RegistID, 
+  <update id="updataRecord" parameterType="com.localhost.model.po.medicalrecord">
+  	updata medicalrecord set 
+  			readme = #{readme},
+  			present = #{present},
+			presenttreat = #{presenttreat},
+			history = #{history},
+			allergy = #{allergy},
+			physique = #{physique},
+			proposal = #{proposal},
+			careful = #{careful}
+	where RegistID = #{registid}
+  </update>
+  
+  <insert id="insert" parameterType="com.localhost.model.po.medicalrecord" keyProperty="ID" useGeneratedKeys="true">
+    insert into medicalrecord (CaseNumber, RegistID, 
       Readme, Present, PresentTreat, 
       History, Allergy, Physique, 
       Proposal, Careful, CheckResult, 
       Diagnosis, Handling, CaseState
       )
-    values (#{id,jdbcType=INTEGER}, #{casenumber,jdbcType=VARCHAR}, #{registid,jdbcType=INTEGER}, 
+    values (#{casenumber,jdbcType=VARCHAR}, #{registid,jdbcType=INTEGER}, 
       #{readme,jdbcType=VARCHAR}, #{present,jdbcType=VARCHAR}, #{presenttreat,jdbcType=VARCHAR}, 
       #{history,jdbcType=VARCHAR}, #{allergy,jdbcType=VARCHAR}, #{physique,jdbcType=VARCHAR}, 
       #{proposal,jdbcType=VARCHAR}, #{careful,jdbcType=VARCHAR}, #{checkresult,jdbcType=VARCHAR}, 
       #{diagnosis,jdbcType=VARCHAR}, #{handling,jdbcType=VARCHAR}, #{casestate,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.localhost.model.po.medicalrecord">
+  <insert id="insertSelective" parameterType="com.localhost.model.po.medicalrecord" keyProperty="ID" useGeneratedKeys="true">
     insert into medicalrecord
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
       <if test="casenumber != null">
         CaseNumber,
       </if>
@@ -89,9 +111,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
       <if test="casenumber != null">
         #{casenumber,jdbcType=VARCHAR},
       </if>

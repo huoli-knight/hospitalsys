@@ -14,7 +14,7 @@ import com.localhost.model.service.LoginService;
 
 @Controller
 @RequestMapping("/user")
-public class loginController {
+public class LoginController {
 
 	@Autowired
 	private LoginService loginService;

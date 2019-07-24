@@ -28,7 +28,6 @@
 <title>医生</title>
 </head>
 <body>
-<p><span id="test1">7</span></p>
 <div class="page-container">
 <div id="tab-system" class="HuiTab">
 	<div class="tabBar cl">
@@ -46,20 +45,20 @@
 			主诉：
 			<textarea class="textarea" id="readme"></textarea>					
 			现病史：
-			<textarea class="textarea"></textarea>
+			<textarea class="textarea" id="present"></textarea>
 			现病治疗情况：
-			<textarea class="textarea"></textarea>
+			<textarea class="textarea" id="presentTreat"></textarea>
 			治疗史：
-			<textarea class="textarea"></textarea>
+			<textarea class="textarea" id="history"></textarea>
 			过敏史：
-			<textarea class="textarea"></textarea>
+			<textarea class="textarea" id="allergy"></textarea>
 			体格检查：
-			<textarea class="textarea"></textarea>		
+			<textarea class="textarea" id="physique"></textarea>		
 			<div><br/>
-				<input type="radio"  name="ICD" />西医诊断<br/>
-				<input type="radio"  name="ICD" />中医诊断<br/>
-				<button class="diagnosisButton">查看</button><button class="diagnosisButton">删除</button><button class="diagnosisButton">增加</button>
-				请输入ICD编码:<input type="text"><button>确定</button>&nbsp;<button>取消</button><br/>
+				<input type="radio"  name="ICD" id="radioICD0"/>西医诊断<br/>
+				<input type="radio"  name="ICD" id="radioICD1"/>中医诊断<br/>
+				<button class="diagnosisButton">查看</button><button class="diagnosisButton" id="diagnosisButton0">删除</button><button class="diagnosisButton" id="diagnosisButton1">增加</button>
+				<span id="addicd">请输入ICD编码：<input type="text" id="sumbut0"><button id="determineButton">确定</button>&nbsp;<button id="close">关闭</button></span><br/>
 					<table id="setdata" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 						<thead>
 							<tr class="text-c">
@@ -71,21 +70,22 @@
 						</thead>
 						<tbody id="sysData">
 							<tr class="text-c titletype">
-							<td><input type="checkbox" value="" name=""></td>
-							<td class="titletype"></td>
-							<td class="titletype"></td>
-							<td class="titletype"></td></tr>
+							<td><input type="checkbox" value="" name="" id="select0"></td>
+							<td class="titletype" id="icd0"></td>
+							<td class="titletype" id="name0"></td>
+							<td class="titletype" id="time0"></td></tr>
 						</tbody>
 					</table>    
 			</div>
 			检查建议：
-				<textarea class="textarea"></textarea>
+				<textarea class="textarea" id="proposal"></textarea>
 			注意事项：
-				<textarea class="textarea"></textarea>			
+				<textarea class="textarea" id="careful"></textarea>			
 		</div>						
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2 centre">
-			<button class="btn btn-primary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
-			<button class="btn btn-default radius" type="button">清空</button>
+			<button class="btn btn-primary radius" type="button" id="buttonSave"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+			<button class="btn btn-primary radius" type="button" id="buttonTemporaryStorage"><i class="Hui-iconfont">&#xe632;</i> 暂存</button>
+			<button class="btn btn-default radius" type="button" id="cleanUp">清空</button>
 		</div>
 	</div>
 	<div class="tabCon" id="tabCon1">
@@ -183,8 +183,7 @@
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="js/doctor-systemBase.html.js"></script>
+<script type="text/javascript" src="js/doctor-systemBase.js"></script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

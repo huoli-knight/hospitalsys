@@ -8,4 +8,11 @@ public interface medicalrecordMapper {
     int insertSelective(medicalrecord record);
     
     public medicalrecord getPatientData(int id);
+
+    public int getDieaseState(int registId);
+    
+    public medicalrecord getData(int id);
+    
+    public void updataRecord(medicalrecord record);
+    
 }

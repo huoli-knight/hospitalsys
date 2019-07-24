@@ -18,3 +18,7 @@ button.diagnosisButton {
 div.centre {
 	text-align: center;
 }
+
+#addicd {
+	visibility:hidden;
+}

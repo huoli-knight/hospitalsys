@@ -9,6 +9,22 @@
     <result column="DiseCategoryID" jdbcType="INTEGER" property="disecategoryid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  
+  <select id="getId" parameterType="String" resultType="int">
+   select ID
+   from disease
+   where DiseaseICD like #{DiseaseICD}
+  </select>
+  
+  <select id="getDiseaseData" parameterType="int" resultMap="BaseResultMap">
+  	select *
+  	from disease d
+  	where d.ID = (select md.DiseaseID
+  					from medicaldisease md
+  					where md.RegistID = #{ID}
+  					)
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.disease">
     insert into disease (ID, DiseaseCode, DiseaseName, 
       DiseaseICD, DiseCategoryID, DelMark

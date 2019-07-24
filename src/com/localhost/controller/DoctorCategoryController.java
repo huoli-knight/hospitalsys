@@ -14,7 +14,7 @@ import com.localhost.utils.Jurisdiction;
 
 @Controller
 @RequestMapping("/doctor")
-public class doctorCategoryController {
+public class DoctorCategoryController {
 	
 	@Autowired
 	DoctorCategoryService doctorCategoryService;

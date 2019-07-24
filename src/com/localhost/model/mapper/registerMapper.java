@@ -12,4 +12,6 @@ public interface registerMapper {
     public List<register> getSeekingDoctor();
     
     public List<register> getNoSeekingDoctor();
+    
+    public String getCaseNumber(int id);
 }
