@@ -68,7 +68,7 @@ public class DoctorSystemBaseController {
 		String key = "";
 		for (int i = 0; i < number; i++) {
 			key = key0 + i;
-			if (doctorSystemBaseService.deleteICDData(id, Integer.parseInt(request.getParameter(key))) == 0) {
+			if (doctorSystemBaseService.deleteICDData(id, request.getParameter(key)) == 0) {
 				result = "false";
 			}
 		}

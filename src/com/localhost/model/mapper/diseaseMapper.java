@@ -11,6 +11,6 @@ public interface diseaseMapper {
     
     public List<disease> getDiseaseData(int id);
     
-    public int getId(String icd);
+    public Integer getId(String icd);
     
 }

@@ -22,10 +22,10 @@
   <select id="getData" parameterType="int" resultMap="BaseResultMap">
   	select *
   	from medicalrecord
-  	where RegistID = # {ID}
+  	where RegistID = #{ID}
   </select>
   
-  <select id="getDieaseState" parameterType="int" resultType="int">
+  <select id="getDieaseState" parameterType="int" resultType="Integer">
   	select CaseState
   	from medicalrecord
   	where RegistID = #{ID}
@@ -38,15 +38,15 @@
   </select>
   
   <update id="updataRecord" parameterType="com.localhost.model.po.medicalrecord">
-  	updata medicalrecord set 
-  			readme = #{readme},
-  			present = #{present},
-			presenttreat = #{presenttreat},
-			history = #{history},
-			allergy = #{allergy},
-			physique = #{physique},
-			proposal = #{proposal},
-			careful = #{careful}
+  	update medicalrecord set 
+  			Readme = #{readme,jdbcType=VARCHAR},
+  			Present = #{present},
+			PresentTreat = #{presenttreat},
+			History = #{history},
+			Allergy = #{allergy},
+			Physique = #{physique},
+			Proposal = #{proposal},
+			Careful = #{careful}
 	where RegistID = #{registid}
   </update>
   

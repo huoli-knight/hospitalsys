@@ -14,6 +14,6 @@ public interface medicaldiseaseMapper {
     
     public List<medicaldisease> getMedicalTime(int registId);
     
-    public int deleteDieaseId(@Param("diseaseId") int registId, @Param("icd") int icd);
+    public Integer deleteDieaseIcd(@Param("registId") int registId, @Param("icd") String icd);
     
 }

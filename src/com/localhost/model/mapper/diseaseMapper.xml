@@ -10,16 +10,16 @@
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
   
-  <select id="getId" parameterType="String" resultType="int">
+  <select id="getId" parameterType="String" resultType="INTEGER">
    select ID
    from disease
-   where DiseaseICD like #{DiseaseICD}
+   where DiseaseICD = #{DiseaseICD}
   </select>
   
   <select id="getDiseaseData" parameterType="int" resultMap="BaseResultMap">
   	select *
   	from disease d
-  	where d.ID = (select md.DiseaseID
+  	where d.ID in (select md.DiseaseID
   					from medicaldisease md
   					where md.RegistID = #{ID}
   					)

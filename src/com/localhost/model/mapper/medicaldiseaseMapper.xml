@@ -11,13 +11,13 @@
     <result column="DiagnoseCate" jdbcType="INTEGER" property="diagnosecate" />
   </resultMap>
     
-  <delete id="deleteDieaseId" parameterType="int">
+  <delete id="deleteDieaseIcd">
   	delete
-  	from medicalrecord mr
-  	where mr.DiseaseID in (select ID
-  							from disease d
-  							where d.DiseaseICD = #{icd})
-  		and mr.RegistID = #{diseaseId}
+  	from medicaldisease
+  	where  RegistID = #{registId}
+  			and DiseaseID in (select ID
+  							from disease
+  							where DiseaseICD = '${icd}')
   	</delete>
   
   <select id="getMedicalTime" parameterType="int" resultMap="BaseResultMap">
