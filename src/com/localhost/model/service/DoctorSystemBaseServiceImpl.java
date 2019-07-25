@@ -46,7 +46,6 @@ public class DoctorSystemBaseServiceImpl implements DoctorSystemBaseService {
 
 	@Override
 	public List<medicaldisease> getMedicalTime(int registId) {
-		List<medicaldisease> a= medicalDiseaseMapper.getMedicalTime(registId);
 		return medicalDiseaseMapper.getMedicalTime(registId);
 	}
 
@@ -56,10 +55,13 @@ public class DoctorSystemBaseServiceImpl implements DoctorSystemBaseService {
 		medicalDisease.setGetsiskdate(time);
 		medicalDisease.setDiagnosetype(Integer.parseInt(radioICD));
 		medicalrecord medicalRecord = medicalRecordMapper.getData(Integer.parseInt(patientName));
-		medicalDisease.setMedicalid(medicalRecord.getRegistid());
+		medicalDisease.setRegistid(Integer.parseInt(patientName));
 		medicalDisease.setMedicalid(medicalRecord.getId());
 		medicalDisease.setDiagnosecate(1);
-		medicalDisease.setDiseaseid(diseaseMapper0.getId(radioICD));
+		if (diseaseMapper0.getId(icd) == 0) {
+			return 0;
+		}
+		medicalDisease.setDiseaseid(diseaseMapper0.getId(icd));
 		if (medicalDiseaseMapper.insert(medicalDisease) != 0) {
 			return 1;
 		}
@@ -67,8 +69,8 @@ public class DoctorSystemBaseServiceImpl implements DoctorSystemBaseService {
 	}
 
 	@Override
-	public int deleteICDData(int medicalDiseaseId, int icd) {
-		return medicalDiseaseMapper.deleteDieaseId(medicalDiseaseId, icd);
+	public int deleteICDData(int medicalDiseaseId, String icd) {
+		return medicalDiseaseMapper.deleteDieaseIcd(medicalDiseaseId, icd);
 	}
 
 	@Override

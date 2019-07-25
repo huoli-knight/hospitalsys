@@ -103,14 +103,7 @@ $(function(){
 					patientName:patientName
 				},
 				success:function(data){
-					if (data.length != 0) {
-						$("#icd0").html(data[0].diseaseicd);
-						$("#name0").html(data[0].diseasename);
-						$("#time0").attr("id","time" + data[0].id);
-						$("#select0").attr("name","sign");
-						$("#select0").attr("value",data[0].diseaseicd + "");
-					}
-					for(var i=1; i < data.length; i++) {
+					for(var i=0; i < data.length; i++) {
 						$("#sysData").append(
 												"<tr class=\"text-c titletype\">" +
 												"<td><input type=\"checkbox\" name=\"sign\" id=\"select" + i + "\"  value=\"" + data[i].diseaseicd + "\"></td>" +
@@ -128,9 +121,10 @@ $(function(){
 						},
 						success:function(data0){
 							var time = new Date();
-							var key = "#time";
+							var key1 = "#time";
+							var key = "";
 							for (var i=0; i< data0.length; i++)  {
-								key = key + data0[i].diseaseid;
+								key = key1 + data0[i].diseaseid;
 								time = new Date(data0[i].getsiskdate);
 								$(key).html(time.toLocaleString());
 							}
@@ -189,10 +183,11 @@ $(function(){
 				time:time
 			},
 			success:function(data){
-				if (data.result == "1") {
+				if (data.result0 == "1") {
 					alert("添加成功！");
+					return;
 				}
-				if (data.result == "0") {
+				if (data.result0 == "0") {
 					alert("ICD不存在！");
 				} else {
 					alert("错误！请刷新重试！");
@@ -226,16 +221,15 @@ $(function(){
 		}
 		$.ajax({
 			type:"post",
-			url:"constant/deleteICD",
+			url:"doctorBase/deleteICD",
 			dataType:"json",
 			async:true,
 			data: selectData,
 			beforeSend: function(){
-				alert("正在处理，请稍后...");
 				$("#diagnosisButton0").attr({ disabled: "disabled" });
 			},
 			success:function(data) {
-				if (data.result) {
+				if (data.result0) {
 					alert("删除成功！");
 				} else {
 					alert("删除失败！数据可能已被修改！请刷新重试！");
@@ -269,7 +263,7 @@ $(function(){
 		var careful= $("#careful").val();
 		$.ajax({
 			type:"post",
-			url:"constant/saveIndexData",
+			url:"doctorBase/saveIndexData",
 			dataType:"json",
 			async:true,
 			data: {
@@ -285,7 +279,7 @@ $(function(){
 				careful:careful,
 			},
 			success:function(data) {
-				if (data.result) {
+				if (data.result0) {
 					alert("成功！");
 				} else {
 					alert("失败！请刷新重试！");

@@ -21,7 +21,7 @@ public interface DoctorSystemBaseService {
 	
 	public int insertICDData(String patientName, String icd, String radioICD, Date time);
 	
-	public int deleteICDData(int medicalDiseaseId, int icd);
+	public int deleteICDData(int medicalDiseaseId, String icd);
 	
 	public String saveIndexData(String patientName, String data0, medicalrecord medicalRecord);
 	

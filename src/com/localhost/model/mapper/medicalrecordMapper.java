@@ -9,7 +9,7 @@ public interface medicalrecordMapper {
     
     public medicalrecord getPatientData(int id);
 
-    public int getDieaseState(int registId);
+    public Integer getDieaseState(int registId);
     
     public medicalrecord getData(int id);
     
