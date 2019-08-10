@@ -18,6 +18,31 @@
     <result column="FeeType" jdbcType="INTEGER" property="feetype" />
     <result column="BackID" jdbcType="INTEGER" property="backid" />
   </resultMap>
+  
+   
+  
+  <select id="getNumber" resultType="Integer">
+  	SELECT
+	count(*)
+	FROM
+		patientcosts p
+	WHERE
+		p.DeptID in (
+			SELECT
+				d.ID
+			FROM
+				department d
+			<where>
+			<if test="constantID!=null and constantID.size>0">
+			<foreach collection="constantID" open="and d.DeptCategoryID in(" separator="," close=")" item="DeptCategoryID">
+				#{DeptCategoryID}
+			</foreach>
+			</if>
+			</where>
+		)
+		and TIMESTAMP(Createtime) between TIMESTAMP('${startTime}') and TIMESTAMP('${endTime}')
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.patientcosts">
     insert into patientcosts (ID, RegistID, InvoiceID, 
       ItemID, ItemType, Name, 

@@ -11,6 +11,32 @@
     <result column="Amount" jdbcType="DECIMAL" property="amount" />
     <result column="State" jdbcType="INTEGER" property="state" />
   </resultMap>
+    
+  <select id="getFee" resultType="INTEGER">
+  SELECT
+	sum(pt.Amount * drugs.DrugsPrice)
+	FROM
+		prescriptiondetailed pt, (select PrescriptionTime,ID
+									from prescription p
+									where p.RegistID in (SELECT d.ID
+														from department d
+														<where>
+														<if test="constantID!=null and constantID.size>0">
+														<foreach collection="constantID" open="and d.DeptCategoryID in(" separator="," close=")" item="DeptCategoryID">
+															#{DeptCategoryID}
+														</foreach>
+														</if>
+														</where>
+														)) as psp,
+		drugs
+	WHERE
+		pt.PrescriptionID = psp.ID and drugs.ID = pt.DrugsID
+		and TIMESTAMP(psp.PrescriptionTime) between TIMESTAMP('${startTime}') and TIMESTAMP('${endTime}')
+		and drugs.DrugsTypeID = (select ct.ID
+									from constantitem ct
+									where ct.ConstantName = #{drugsType})
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.prescriptiondetailed">
     insert into prescriptiondetailed (ID, PrescriptionID, DrugsID, 
       DrugsUsage, Dosage, Frequency, 

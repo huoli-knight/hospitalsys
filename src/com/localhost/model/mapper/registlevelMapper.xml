@@ -10,6 +10,18 @@
     <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  
+   <select id="getRegistFee" resultType="BigDecimal">
+  select rl.RegistFee
+	from registlevel rl
+	where rl.ID = #{LevelId}
+  </select>
+  
+  <select id="getNumber" resultType="Integer">
+  select registlevel.ID
+  from registlevel
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.registlevel">
     insert into registlevel (ID, RegistCode, RegistName, 
       SequenceNo, RegistFee, RegistQuota, 

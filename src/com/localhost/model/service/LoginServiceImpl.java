@@ -9,11 +9,11 @@ public class LoginServiceImpl implements LoginService{
 
 	private user userState;
 	@Autowired
-	private userMapper loginService;
+	private userMapper usermapper0;
 	
 	@Override
 	public Integer getJudgmentResult(String username, String password) {
-		if (loginService.getUser(username) == null) {
+		if (usermapper0.getUser(username) == null) {
 			return Integer.valueOf(-1);
 		}
 		//防止注入攻击
@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService{
 			}
 			return Integer.valueOf(-1);
 		}
-		userState = loginService.getUser(username);
+		userState = usermapper0.getUser(username);
 		if (userState.getPassword().equals(password)) {
 			return userState.getUsetype();
 		}
@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService{
 
 	@Override
 	public String getName(String username) {
-		userState = loginService.getUser(username);
+		userState = usermapper0.getUser(username);
 		return userState.getRealname();
 	}
 	

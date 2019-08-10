@@ -15,6 +15,30 @@
     <result column="RecordType" jdbcType="INTEGER" property="recordtype" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  
+  <select id="getRecordTypeFee" resultType="Integer">
+   SELECT
+	sum(f.Price)
+	FROM
+		fmeditem f
+	WHERE
+		f.DeptID in (
+			SELECT
+				d.ID
+			FROM
+				department d
+			<where>
+			<if test="constantID!=null and constantID.size>0">
+			<foreach collection="constantID" open="and d.DeptCategoryID in(" separator="," close=")" item="DeptCategoryID">
+				#{DeptCategoryID}
+			</foreach>
+			</if>
+			</where>
+		)
+		and f.RecordType = #{typeNumber}
+		and TIMESTAMP(CreationDate) between TIMESTAMP('${startTime}') and TIMESTAMP('${endTime}')
+  </select>
+  
   <insert id="insert" parameterType="com.localhost.model.po.fmeditem">
     insert into fmeditem (ID, ItemCode, ItemName, 
       Format, Price, ExpClassID, 

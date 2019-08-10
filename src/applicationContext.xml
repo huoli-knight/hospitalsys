@@ -52,8 +52,9 @@
 			<tx:method name="save*" propagation="REQUIRED"/>
 			<tx:method name="update*" propagation="REQUIRED"/>
 			<tx:method name="delete*" propagation="REQUIRED"/>
-			<tx:method name="select*" propagation="REQUIRED"/>
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
 			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="insert*" propagation="REQUIRED"/>
 			<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
 		</tx:attributes>
 	</tx:advice>
@@ -66,5 +67,6 @@
 	<bean id="loginService" class="com.localhost.model.service.LoginServiceImpl"></bean>
 	<bean id="constantService" class="com.localhost.model.service.ConstantServiceImpl"></bean>
 	<bean id="doctorCategoryService" class="com.localhost.model.service.DoctorCategoryServiceImpl"></bean>
-	<bean id="doctorSystemBaseServiceImpl.java" class="com.localhost.model.service.DoctorSystemBaseServiceImpl"></bean>
+	<bean id="doctorSystemBaseService" class="com.localhost.model.service.DoctorSystemBaseServiceImpl"></bean>
+	<bean id="outpatientService" class="com.localhost.model.service.OutpatientServiceImpl"></bean>
 </beans>

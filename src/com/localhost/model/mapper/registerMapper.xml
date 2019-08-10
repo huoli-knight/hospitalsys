@@ -23,6 +23,51 @@
     <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
   </resultMap>
   
+  <select id="getNumberOfVisits" resultType="Integer">
+  SELECT
+	count(*)
+	FROM
+		register r
+	WHERE
+		r.DeptID IN (
+			SELECT
+				d.ID
+			FROM
+				department d
+			<where>
+			<if test="constantID!=null and constantID.size>0">
+			<foreach collection="constantID" open="and d.DeptCategoryID in(" separator="," close=")" item="DeptCategoryID">
+				#{DeptCategoryID}
+			</foreach>
+			</if>
+			</where>
+		)
+		and TIMESTAMP(RegistTime) between TIMESTAMP('${startTime}') and TIMESTAMP('${endTime}')
+  </select>
+  
+  <select id="getRegistration" resultType="Integer">
+  SELECT
+	count(r.ID)
+	FROM
+		register r
+	WHERE
+		r.DeptID IN (
+			SELECT
+				d.ID
+			FROM
+				department d
+			<where>
+			<if test="constantID!=null and constantID.size>0">
+			<foreach collection="constantID" open="and d.DeptCategoryID in(" separator="," close=")" item="DeptCategoryID">
+				#{DeptCategoryID}
+			</foreach>
+			</if>
+			</where>
+		)
+		and r.RegistLeID = #{LevelId}
+		and TIMESTAMP(RegistTime) between TIMESTAMP('${startTime}') and TIMESTAMP('${endTime}')
+  </select>
+  
   <select id="getCaseNumber" parameterType="String" resultType="int">
   	select CaseNumber
   	from register

@@ -10,6 +10,7 @@
     <result column="PrescriptionTime" jdbcType="TIMESTAMP" property="prescriptiontime" />
     <result column="PrescriptionState" jdbcType="INTEGER" property="prescriptionstate" />
   </resultMap>
+
   <insert id="insert" parameterType="com.localhost.model.po.prescription">
     insert into prescription (ID, MedicalID, RegistID, 
       UserID, PrescriptionName, PrescriptionTime, 
