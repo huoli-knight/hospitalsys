@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+p.title {
+	text-align: center;
+	font-size: larger;
+}
+
+tr.text-c th{
+	background-color: #8080ff;
+}
+
+th,td {
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+
+#obliqueLine {
+	background-color:#ffffff;
+}
+
+td.name {
+	background-color:#c0c0c0;
+}
+
+tr.obliqueLine0 th{
+	 border: none 1px #e5e5e5;
+     background-color: white;
+     padding: 0px;
+}

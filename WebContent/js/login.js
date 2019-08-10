@@ -1,4 +1,11 @@
 $(function(){
+	
+	$("body").keyup(function(event){
+		 if(event.keyCode ==13){
+		    $("#btlogin").trigger("click");
+		 }
+	});
+	
 	var errorNumber = 0;
 	
 	if ($.cookie('username')) {
