@@ -11,55 +11,54 @@ $(function(){
 		$("#careful").val("");
 	});
 	
-	var tabBar = "#tabCon0";
-	var patientName = parent.document.getElementById('tree_id').value;
-	
+	var tabCon = "#tabCon0";
+
 	$("#tabBar0").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon0").css("display","block");
-		tabBar = "#tabCon0";
+		tabCon = "#tabCon0";
 	});
   
 	$("#tabBar1").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon1").css("display","block");
-		tabBar = "#tabCon1";
+		tabCon = "#tabCon1";
 	});
 	
 	$("#tabBar2").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon2").css("display","block");
-		tabBar = "#tabCon2";
+		tabCon = "#tabCon2";
 	});
 	
 	$("#tabBar3").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon3").css("display","block");
-		tabBar = "#tabCon3";
+		tabCon = "#tabCon3";
 	});
 	
 	$("#tabBar4").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon4").css("display","block");
-		tabBar = "#tabCon4";
+		tabCon = "#tabCon4";
 	});
 	
 	$("#tabBar5").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon5").css("display","block");
-		tabBar = "#tabCon5";
+		tabCon = "#tabCon5";
 	});
 	
 	$("#tabBar6").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon6").css("display","block");
-		tabBar = "#tabCon6";
+		tabCon = "#tabCon6";
 	});
 	
 	$("#tabBar7").click(function(){
-		$(tabBar).css("display","none");
+		$(tabCon).css("display","none");
 		$("#tabCon7").css("display","block");
-		tabBar = "#tabCon7";
+		tabCon = "#tabCon7";
 	});
 	
 	$("#diagnosisButton1").click(function(){
@@ -70,6 +69,10 @@ $(function(){
 		$("#sumbut0").val("");
 		$("#addicd").css("visibility","hidden");
 	})
+	
+	//registId
+//	var parent=window.dialogArguments;
+	var patientName = parent.document.getElementById("tree_id").value;
 	
 	if (patientName.length >= 3) {
 		if (patientName[1] == "1") {
