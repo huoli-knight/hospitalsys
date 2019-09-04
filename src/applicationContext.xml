@@ -70,4 +70,10 @@
 	<bean id="doctorCategoryService" class="com.localhost.model.service.DoctorCategoryServiceImpl"></bean>
 	<bean id="doctorSystemBaseService" class="com.localhost.model.service.DoctorSystemBaseServiceImpl"></bean>
 	<bean id="outpatientService" class="com.localhost.model.service.OutpatientServiceImpl"></bean>
+	<bean id="fmeditemService" class="com.localhost.model.service.ZHSFmeditemServiceImpl"></bean>
+	<bean id="departmentService" class="com.localhost.model.service.ZHSDepartmentServiceImpl"></bean>
+	<bean id="expenseclassService" class="com.localhost.model.service.ZHSExpenseClassServiceImpl"></bean>
+	<bean id="userService" class="com.localhost.model.service.ZHSUserServiceImpl"></bean>
+	<bean id="checkapplyService" class="com.localhost.model.service.ZHSCheckApplyServiceImpl"></bean>
+	<bean id="registerService" class="com.localhost.model.service.ZHSRegisterServiceImpl"></bean>
 </beans>

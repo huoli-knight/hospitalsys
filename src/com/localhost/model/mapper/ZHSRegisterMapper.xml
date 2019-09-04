@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.localhost.model.mapper.ZHSRegisterMapper">
+
+<!-- 	<update id="updateUser" parameterType="com.neuedu.po.User"> -->
+<!-- 		update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} -->
+<!-- 		where id=#{id} -->
+<!-- 	</update> -->
+
+<!-- 	<select id="findRegisterByCaseNumber" parameterType="int" resultMap="RegisterMap"> -->
+<!-- 		select register.*, constantitem.ConstantName, checkapply.ID as secondID, checkapply.* -->
+<!-- 		from  register left outer join checkapply on register.ID = checkapply.RegistID, constantitem -->
+<!-- 		where register.CaseNumber = #{CaseNumber} and register.Gender = constantitem.ID -->
+<!-- 	</select>  -->
+	
+<!-- 	<select id="findRegisterByName" parameterType="String" resultMap="RegisterMap"> -->
+<!-- 		select register.*, constantitem.ConstantName, checkapply.ID as secondID, checkapply.* -->
+<!-- 		from  register left outer join checkapply on register.ID = checkapply.RegistID, constantitem -->
+<!-- 		where RealName like '${_parameter}' and register.Gender = constantitem.ID  -->
+<!-- 	</select> -->
+	
+<!-- 	<resultMap type="com.neuedu.model.po.Register" id="RegisterMap"> -->
+<!-- 		<id property="ID" column="ID"/> -->
+<!-- 		<result property="CaseNumber" column="CaseNumber"/> -->
+<!-- 		<result property="RealName" column="RealName"/> -->
+<!-- 		<result property="ConstantName" column="ConstantName"/> -->
+<!-- 		<result property="IDnumber" column="IDnumber"/> -->
+<!-- 		<result property="BirthDate" column="BirthDate"/> -->
+<!-- 		<result property="Age" column="Age"/> -->
+<!-- 		<result property="AgeType" column="AgeType"/> -->
+<!-- 		<result property="HomeAddress" column="HomeAddress"/> -->
+<!-- 		<result property="VisitDate" column="VisitDate"/> -->
+<!-- 		<result property="Noon" column="Noon"/> -->
+<!-- 		<result property="RegistTime" column="RegistTime"/> -->		
+<!-- 		目前没有用到一对一 方法二 -->
+<!-- 		<association property="constantItem" javaType="com.neuedu.model.po.ConstantItem"> -->
+<!-- 			<result property="Sex" column="ConstantName"/> -->
+<!-- 		</association> -->	
+<!-- 		一对多查询 -->
+<!-- 		<collection property="checkApplylist" ofType="com.neuedu.model.po.CheckApply"> -->
+<!-- 			<id property="ID" column="secondID"/> -->
+<!-- 			<result property="RegistID" column="RegistID"/> -->
+<!-- 			<result property="ItemID" column="ItemID"/> -->
+<!-- 			<result property="Name" column="Name"/> -->
+<!-- 			<result property="IsUrgent" column="IsUrgent"/> -->
+<!-- 			<result property="Objective" column="Objective"/> -->
+<!-- 			<result property="Position" column="Position"/> -->
+<!-- 			<result property="Num" column="Num"/> -->
+<!-- 			<result property="CreationTime" column="CreationTime"/> -->
+<!-- 			<result property="State" column="State"/> -->
+<!-- 		</collection> -->
+<!-- 	</resultMap> -->
+
+	<select id="findRegisterByCaseNumber" parameterType="int" resultType="ZHSRegister">
+		select register.*, constantitem.ConstantName 
+		from register, constantitem 
+		where constantitem.ID = register.Gender and register.CaseNumber = #{CaseNumber}
+	</select>
+	
+	<select id="findRegisterByName" parameterType="String" resultType="ZHSRegister">
+		select * from register where RealName like '${_parameter}'
+	</select>
+	
+</mapper>

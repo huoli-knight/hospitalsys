@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+	<script src="static/ZHSjs/check.js"></script>
+
+	<script>
+		var change_flag = true;
+		function change() {
+			var c = document.getElementById("icon");
+			if (change_flag) {
+				c.innerHTML = "☰ 展开";
+			} else {
+				c.innerHTML = "☰ 收起"
+			}
+			change_flag = !change_flag;
+		}
+	</script>
+	<style type="text/css">
+		@media (min-width : 1200px) {
+			.container {
+				max-width: 1500px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<!-- 		<div class="py-3 text-center m-auto text-white bg-dark rounded"> -->
+		<!-- 			<h2>患者检验</h2> -->
+		<!-- 		</div> -->
+		<div class="py-4 bg-white"></div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card border-warning">
+					<div class="card-header bg-warning">
+						<h4>患者查询</h4>
+					</div>
+					<div class=" card-body text-black">
+						<form id="formtest" class="form-inline">
+							<div class="col-md-4 nav flex-column justify-content-center">
+								<h5>患者信息</h5>
+							</div>
+							<input name="p_info" class="form-control col-md-8" type="text" placeholder="输入患者姓名或病历号"
+								required>
+						</form>
+						<div class="py-2"></div>
+						<div>
+							<div>
+								<h5>查询方式</h5>
+							</div>
+							<div class="row">
+								<div class="col-md-4"></div>
+								<div id="choice" class="d-block my-2">
+									<div class="custom-control custom-radio">
+										<input id="p_id" name="searchMethod" type="radio" class="custom-control-input"
+											checked="checked"> <label class="custom-control-label"
+											for="p_id">病历号</label>
+									</div>
+									<div class="py-2"></div>
+									<div class="custom-control custom-radio">
+										<input id="p_name" name="searchMethod" type="radio"
+											class="custom-control-input"> <label class="custom-control-label"
+											for="p_name">患者姓名</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="py-2"></div>
+						<div>
+							<button type="button" class="btn btn-sm btn-warning" style="float: right"
+								onclick="p_search(2)">查找患者</button>
+						</div>
+						<div class="py-2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div class="card border-primary">
+					<div class="card-header bg-primary">
+						<h4>待诊患者</h4>
+					</div>
+					<div class="card-body text-black" style="font-size: 16px;">
+						<div class="row m-auto">
+							<div class="col-md-6">
+								<table class="table table-bordered table-striped rounded" style='text-align: center;'>
+									<thead>
+										<tr>
+											<th></th>
+											<th>病历号</th>
+											<th>患者姓名</th>
+										</tr>
+									</thead>
+									<tbody id="p_list1">
+									</tbody>
+								</table>
+							</div>
+							<div class="col-md-6">
+								<table class="table table-bordered table-striped rounded" style='text-align: center;'>
+									<thead>
+										<tr>
+											<th></th>
+											<th>病历号</th>
+											<th>患者姓名</th>
+										</tr>
+									</thead>
+									<tbody id="p_list2">
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div style="float:right">
+							<button id="e_btn" class="btn btn-sm btn-primary" type="button" onclick="execute()"
+								disabled>执行确认</button>
+							<button class="btn btn-sm bg-white" type="button" disabled></button>
+							<button id="c_btn" class="btn btn-sm btn-danger" type="button" onclick="cancel()"
+								disabled>取消执行</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="py-2"></div>
+		<div class="card border-info">
+			<div class="card-header bg-info">
+				<div class="row">
+					<div class="col-md-11">
+						<h4>明细</h4>
+					</div>
+					<div class="col-md-1">
+						<button id="icon" type="button" class="btn btn-light btn-sm" data-toggle="collapse"
+							data-target="#detail_info" style="float: right" onclick=" change()">☰ 收起</button>
+					</div>
+				</div>
+			</div>
+			<div id="detail_info" class="card-body text-black collapse show" style="font-size: 16px">
+				<div>
+					<h5>患者信息</h5>
+					<table class="table table-bordered table-striped rounded" style='text-align: center;'>
+						<thead>
+							<tr>
+								<td>病历号</td>
+								<td>姓名</td>
+								<td>性别</td>
+								<td>身份证号</td>
+								<td>出生日期</td>
+								<td>年龄</td>
+								<td>家庭住址</td>
+								<td>本次看诊日期</td>
+								<td>午别</td>
+								<td>挂号时间</td>
+							</tr>
+						</thead>
+						<tbody id="p_detail">
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<h5>项目信息</h5>
+					<table class="table table-bordered table-striped rounded" style='text-align: center;'>
+						<thead>
+							<tr>
+								<td></td>
+								<td>项目ID</td>
+								<td>项目名称</td>
+								<td>是否加急</td>
+								<td>目的要求</td>
+								<td>检验部位</td>
+								<td>数量</td>
+								<td>开立时间</td>
+								<td>状态</td>
+							</tr>
+						</thead>
+						<tbody id="i_detail">
+						</tbody>
+					</table>
+				</div>
+				<div style="float:right">
+					<button id="re_btn" class="btn btn-sm btn-primary" type="button" onclick="re()"
+						disabled>开始录入</button>
+					<button class="btn btn-sm bg-white" type="button" disabled></button>
+					<button id="rc_btn" class="btn btn-sm btn-danger" type="button" onclick="rc()"
+						disabled>取消录入</button>
+				</div>
+			</div>
+		</div>
+		<div class="py-2"></div>
+		<div class="card border-success">
+			<div class="card-header bg-success">
+				<h4>结果录入</h4>
+			</div>
+			<div id="checkresult" class="card-body collapse" style="font-size: 16px">
+				<form id="res_form">
+					<div class="py-2"></div>
+					<input id="checkapply_id" name="che_id" type="hidden">
+					<input name="che_state" type="hidden" value="5">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-2 nav flex-column justify-content-center">检验人员</div>
+								<select id="check_oper" name="che_oper" class="form-control col-md-4">
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-2 nav flex-column justify-content-center">检验时间</div>
+								<input name="check_time" class="col-md-4 form-control" type="date">
+							</div>
+						</div>
+					</div>
+					<div class="py-2"></div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-2 nav flex-column justify-content-center">结果录入人员</div>
+								<select id="result_oper" name="res_oper" class="form-control col-md-4">
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-2 nav flex-column justify-content-center">结果录入时间</div>
+								<input name="result_time" class="col-md-4 form-control" type="date">
+							</div>
+						</div>
+					</div>
+					<div class="py-2"></div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-2 nav flex-column justify-content-center">检验结果</div>
+								<textarea name="input_result" class="form-control col-md-9" rows="1"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="py-2"></div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="col-md-1"></div>
+								<div class="col-md-2 nav flex-column justify-content-center">图片附件</div>
+								<input id="input_file" multiple type="file" accept="image/*">
+							</div>
+						</div>
+					</div>
+					<div class="py-2"></div>
+				</form>
+				<div>
+					<button id="res_button" type="button" class="btn btn-sm btn-primary" style="float: right"
+						onclick="record()">完成录入</button>
+				</div>
+				<div class="py-2"></div>
+			</div>
+		</div>
+		<div class="py-2 bg-light"></div>
+		<!-- 		<div class="py-3 text-center m-auto text-white bg-dark rounded"> -->
+		<!-- 			<h2>患者检验</h2> -->
+		<!-- 		</div> -->
+	</div>
+</body>
+
+</html>

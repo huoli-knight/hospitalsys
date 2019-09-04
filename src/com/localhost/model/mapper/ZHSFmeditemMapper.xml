@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.localhost.model.mapper.ZHSFmeditemMapper">
+
+	<select id="findFmeditem" parameterType="ZHSFmeditemTemplate" resultType="ZHSFmeditem">
+		select fmeditem.*, department.DeptName, expenseclass.ExpName
+		from fmeditem, department, expenseclass
+		<where>
+			fmeditem.ExpClassID = expenseclass.ID and fmeditem.DeptID =department.ID and fmeditem.DelMark = 1
+			<if test="ItemName!=null and ItemName!=''">
+			and ItemName='${ItemName}'
+			</if>
+			<if test="ItemCode!=null and ItemCode!=''">
+			and ItemCode like '${ItemCode}'
+			</if>
+			<if test="RecordType!=null and RecordType!=''">
+			and RecordType = #{RecordType}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addFmeditem" parameterType="ZHSFmeditemTemplate">
+		INSERT INTO fmeditem (fmeditem.ItemCode, fmeditem.ItemName, fmeditem.Format, fmeditem.Price, fmeditem.ExpClassID, fmeditem.DeptID, fmeditem.MnemonicCode, fmeditem.CreationDate, fmeditem.LastUpdateDate, fmeditem.RecordType, fmeditem.DelMark) 
+		VALUES ('${ItemCode}', '${ItemName}', '${Format}', #{Price}, #{ExpClassID}, #{DeptID}, '${MnemonicCode}', #{CreationDate}, #{LastUpdateDate}, #{RecordType}, #{DelMark})
+	</insert>
+	
+	<update id="refreshFmeditem" parameterType="ZHSFmeditemTemplate">
+		update fmeditem
+		set fmeditem.ItemCode = '${ItemCode}', fmeditem.ItemName = '${ItemName}', fmeditem.Format = '${Format}', fmeditem.Price = #{Price}, fmeditem.ExpClassID = #{ExpClassID}, fmeditem.DeptID = #{DeptID}, fmeditem.MnemonicCode = '${MnemonicCode}', fmeditem.CreationDate = #{CreationDate}, fmeditem.LastUpdateDate = #{LastUpdateDate}, fmeditem.RecordType = #{RecordType}
+		where fmeditem.ID = #{ID}
+	</update>
+	
+	<update id="removeFmeditem" parameterType="ZHSFmeditemTemplate">
+		update fmeditem
+		set fmeditem.DelMark = #{DelMark}, fmeditem.LastUpdateDate = #{LastUpdateDate}
+		where fmeditem.ID = #{ID}
+	</update>
+	
+	
+</mapper>
