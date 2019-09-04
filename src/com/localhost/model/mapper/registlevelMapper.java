@@ -15,4 +15,6 @@ public interface registlevelMapper {
     public List<Integer> getNumber();
     
     public BigDecimal getRegistFee(@Param("LevelId") int LevelId);
+    
+    public registlevel getregisterfee(String name);
 }

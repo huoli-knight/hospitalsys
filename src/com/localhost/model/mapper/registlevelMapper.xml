@@ -79,4 +79,13 @@
       </if>
     </trim>
   </insert>
+  
+   <select id="getregisterfee" parameterType="string" resultMap="BaseResultMap">
+  	SELECT
+		*
+	FROM
+		registlevel
+	WHERE
+		registlevel.RegistName= '${value}'
+  </select>
 </mapper>

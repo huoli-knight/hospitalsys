@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.localhost.model.mapper.checkrelationMapper">
-  <resultMap id="BaseResultMap" type="com.localhost.model.po.checkrelation">
+  <resultMap id="BaseResultMap" type="com.localhost.model.po.Relation">
     <result column="ID" jdbcType="INTEGER" property="id" />
     <result column="CheckProjID" jdbcType="INTEGER" property="checkprojid" />
     <result column="CheckTempID" jdbcType="INTEGER" property="checktempid" />
     <result column="Position" jdbcType="VARCHAR" property="position" />
+     <result column="ItemCode" jdbcType="VARCHAR" property="itemcode" />
+    <result column="ItemName" jdbcType="VARCHAR" property="itemname" />
+    <result column="Format" jdbcType="VARCHAR" property="format" />
   </resultMap>
-  <insert id="insert" parameterType="com.localhost.model.po.checkrelation">
-    insert into checkrelation (ID, CheckProjID, CheckTempID, 
+  
+  <select id="getRelationData" parameterType="com.localhost.model.po.checkrelation" resultMap="BaseResultMap">
+  	SELECT
+		itemCode,itemName,Format,Position,checkrelation.id
+	FROM
+		checkrelation,fmeditem
+	WHERE
+		CheckProjID = fmeditem.id AND checkTempID = #{checktempid}
+  </select>
+  
+   <delete id="delete" parameterType="Integer">
+  	DELETE FROM checkrelation WHERE ID = #{id}
+  </delete>
+   <delete id="delete2" parameterType="Integer">
+  	DELETE FROM checkrelation WHERE CheckTempID = #{id}
+  </delete>
+  
+  <insert id="insert" parameterType="com.localhost.model.po.checkrelation" keyProperty="ID" useGeneratedKeys="true">
+    insert into checkrelation (CheckProjID, CheckTempID, 
       Position)
-    values (#{id,jdbcType=INTEGER}, #{checkprojid,jdbcType=INTEGER}, #{checktempid,jdbcType=INTEGER}, 
+    values ( #{checkprojid,jdbcType=INTEGER}, #{checktempid,jdbcType=INTEGER}, 
       #{position,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.localhost.model.po.checkrelation">

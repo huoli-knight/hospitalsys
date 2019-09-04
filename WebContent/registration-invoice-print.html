@@ -47,10 +47,10 @@
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>病历号：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Pcasenumber" name="username">
 			</div>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;查询&nbsp;&nbsp;">
+				<button name="" id="quiry-5" class="btn btn-primary radius" type="button">查询</button>
 			</div>
 		</div>
 		<div class="row cl">
@@ -60,25 +60,25 @@
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>姓名：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Pname" name="username" readonly="readonly">
 			</div>	
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>年龄：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Page" name="username" readonly="readonly">
 			</div>	
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>性别：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Pgender" name="username" readonly="readonly">
 			</div>	
 		</div>	
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%">身份证号：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="PIDnumber" name="username" readonly="readonly">
 			</div>
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%">家庭住址：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Phomeaddress" name="username" readonly="readonly">
 			</div>
 		</div>			
 		<div class="row cl">
@@ -89,35 +89,23 @@
 		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 			<thead>
 				<tr class="text-c">
-					<th width="25"><input type="checkbox" name="" value=""></th>
 					<th width="80">病历号</th>
 					<th>姓名</th>
-					<th width="80">身份证号</th>
-					<th width="80">挂号日期</th>
-					<th width="120">挂号组别</th>
-					<th width="100">看诊科室</th>
-					<th width="80">看诊状态</th>
-					<th width="120">操作</th>
+					<th width="80">发票号</th>
+					<th width="80">发票金额</th>
+					<th width="120">创建日期</th>
+					<th width="80">发票状态</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr class="text-c">
-					<td><input type="checkbox" value="" name=""></td>
-					<td></td>
-					<td class="text-l"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td class="td-status"><span class="label label-success radius"></span></td>
-					<td>
-						<div class="formControls col-xs-2 col-sm-2" style="padding-left:25px">
-						<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;补打发票&nbsp;&nbsp;">
-						</div>
-					</td>
-				</tr>
+			<tbody id="checklist">
+				
 			</tbody>
 		</table>
+		<div class="row cl">
+			<div class="formControls col-xs-2 col-sm-2" style="padding-left:22%">
+				<button name="" id="confirmprint" class="btn btn-primary radius" type="button">补打未打印发票</button>
+			</div>
+		</div>
 	</div>
 	</form>
 </article>
@@ -133,49 +121,8 @@
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	
-	$("#form-member-add").validate({
-		rules:{
-			username:{
-				required:true,
-				minlength:2,
-				maxlength:16
-			},
-			sex:{
-				required:true,
-			},
-			mobile:{
-				required:true,
-				isMobile:true,
-			},
-			email:{
-				required:true,
-				email:true,
-			},
-			uploadfile:{
-				required:true,
-			},
-			
-		},
-		onkeyup:false,
-		focusCleanup:true,
-		success:"valid",
-		submitHandler:function(form){
-			//$(form).ajaxSubmit();
-			var index = parent.layer.getFrameIndex(window.name);
-			//parent.$('.btn-refresh').click();
-			parent.layer.close(index);
-		}
-	});
-});
-</script> 
+<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="js/registration-invoice.js"></script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

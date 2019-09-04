@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.localhost.model.mapper.registrationwithdrawalMapper">
+  <resultMap id="BaseResultMap" type="com.localhost.model.po.registrationwithdrawal">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="CaseNumber" jdbcType="VARCHAR" property="casenumber" />
+    <result column="RealName" jdbcType="VARCHAR" property="realname" />
+    <result column="Gender" jdbcType="INTEGER" property="gender" />
+    <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
+    <result column="BirthDate" jdbcType="DATE" property="birthdate" />
+    <result column="Age" jdbcType="INTEGER" property="age" />
+    <result column="AgeType" jdbcType="CHAR" property="agetype" />
+    <result column="HomeAddress" jdbcType="VARCHAR" property="homeaddress" />
+    <result column="VisitDate" jdbcType="DATE" property="visitdate" />
+    <result column="Noon" jdbcType="CHAR" property="noon" />
+    <result column="DeptID" jdbcType="INTEGER" property="deptid" />
+    <result column="UserID" jdbcType="INTEGER" property="userid" />
+    <result column="RegistLeID" jdbcType="INTEGER" property="registleid" />
+    <result column="SettleID" jdbcType="INTEGER" property="settleid" />
+    <result column="IsBook" jdbcType="CHAR" property="isbook" />
+    <result column="RegistTime" jdbcType="TIMESTAMP" property="registtime" />
+    <result column="RegisterID" jdbcType="INTEGER" property="registerid" />
+    <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
+    <result column="DeptName" jdbcType="CHAR" property="deptname" />
+  </resultMap>
+  
+  
+  <select id="getregisterinformation" parameterType="INTEGER" resultMap="BaseResultMap">
+  	SELECT
+		re.*,de.Deptname
+	FROM
+		register re,department de
+	WHERE
+		re.CaseNumber=#{id}
+		and de.ID=re.DeptID
+  </select>
+  
+  <update id="deleteregisterinformation" parameterType="INTEGER">
+  	UPDATE
+		register set VisitState=4
+	WHERE
+		register.CaseNumber=#{id}
+		and register.VisitState=1
+  </update>
+</mapper>

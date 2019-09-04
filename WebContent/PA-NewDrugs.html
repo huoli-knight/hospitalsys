@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<style type="text/css">
+@charset "UTF-8";
+
+.select1 {
+	display: inline-block;
+	height: 35px;
+	width: 100px;
+	position: relative;
+	vertical-align: middle;
+	padding: 0;
+	overflow: hidden;
+	background-color: #fff;
+	color: #555;
+	border: 1px solid #aaa;
+	text-shadow: none;
+	border-radius: 4px;
+	transition: box-shadow 0.25s ease;
+	z-index: 2;
+	font-size: 16px;
+	font-family: PingFang SC;
+}
+
+.text-c {
+	text-align: left;
+	padding: 20px;
+}
+
+div.screen {
+	padding: 20px;
+}
+button.btn1{
+background-color: #6699CC; 
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+button.btn1:hover{
+background-color: #008CBA;
+    
+}
+</style>
+<title>PA-新增药品</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		管理 <span class="c-gray en">&gt;</span> 列表 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<div class="page-container">
+	<font size="6px" family="PingFang SC">药品信息:</font> 
+		<div class="text-c">
+		<font size="4px" family="PingFang SC">药品编码：</font> 
+				<input
+					type="text" name="" id="DrugCoding" placeholder="药品编码"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+				<font size="4px" family="PingFang SC">药品名称：</font> 
+				<input
+					type="text" name="" id="Nameofdrug" placeholder="药品名称"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+				<font size="4px" family="PingFang SC">药品规格：</font> 
+				<input
+					type="text" name="" id="DrugSpecification" placeholder="药品规格"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+		</div>
+		<div class="text-c">
+		<font size="4px" family="PingFang SC">包装单位：</font> 
+				<input
+					type="text" name="" id="Packagingunit" placeholder="包装单位"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+				<font size="4px" family="PingFang SC">生产厂家：</font> 
+				<input
+					type="text" name="" id="Manufacturer" placeholder="生产厂家"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+				<font size="4px" family="PingFang SC">药品剂型：</font> 
+				<input
+					type="text" name="" id="P-d-f" placeholder="药品剂型"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+		</div>
+		<div class="text-c">
+		<font size="4px" family="PingFang SC">药品类型：</font> 
+				<input
+					type="text" name="" id="Drugtypes" placeholder="包装单位"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+				<font size="4px" family="PingFang SC">药品单价：</font> 
+				<input
+					type="text" name="" id="D-u-p" placeholder="药品单价"
+					style="width: 220px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+				<font size="4px" family="PingFang SC">拼音助记码：</font> 
+				<input
+					type="text" name="" id="P-m-c" placeholder="拼音助记码"
+					style="width: 200px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">&nbsp;&nbsp;
+		</div>
+		
+		<div class="screen">
+			
+			<button name="" id="add" class="btn1" type="button">
+				<i class="Hui-iconfont">&#xe6dc;</i> 添加
+			</button>
+		</div>
+		
+	</div>
+
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+$('.table-sort').dataTable({
+	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+	"bStateSave": true,//状态保存
+	"pading":false,
+	"aoColumnDefs": [
+	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+	  {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
+	]
+});
+</script>
+<script type="text/javascript" src="js/Pharmacy-Administration.js"></script>
+</body>
+</html>

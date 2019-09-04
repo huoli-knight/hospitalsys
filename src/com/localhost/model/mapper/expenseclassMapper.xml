@@ -7,6 +7,22 @@
     <result column="ExpName" jdbcType="VARCHAR" property="expname" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  
+   <select id="getsubjectData" parameterType="String" resultMap="BaseResultMap" >
+  SELECT
+		expenseclass.*
+	FROM
+		expenseclass
+	WHERE
+		ExpCode=#{expcode}
+  </select>
+  
+  <select id="getallsubjectData" parameterType = "String" resultMap = "BaseResultMap">
+    SELECT
+		expenseclass.*
+	FROM
+		expenseclass
+  </select>
   <insert id="insert" parameterType="com.localhost.model.po.expenseclass">
     insert into expenseclass (ID, ExpCode, ExpName, 
       DelMark)

@@ -37,7 +37,7 @@
   	where RegistID = #{ID}
   </select>
   
-  <update id="updataRecord" parameterType="com.localhost.model.po.medicalrecord">
+  <update id="savaRecord" parameterType="com.localhost.model.po.medicalrecord">
   	update medicalrecord set 
   			Readme = #{readme,jdbcType=VARCHAR},
   			Present = #{present},
@@ -46,7 +46,8 @@
 			Allergy = #{allergy},
 			Physique = #{physique},
 			Proposal = #{proposal},
-			Careful = #{careful}
+			Careful = #{careful},
+			CaseState = #{casestate}
 	where RegistID = #{registid}
   </update>
   
@@ -64,6 +65,7 @@
       #{diagnosis,jdbcType=VARCHAR}, #{handling,jdbcType=VARCHAR}, #{casestate,jdbcType=INTEGER}
       )
   </insert>
+  
   <insert id="insertSelective" parameterType="com.localhost.model.po.medicalrecord" keyProperty="ID" useGeneratedKeys="true">
     insert into medicalrecord
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -13,6 +13,6 @@ public interface medicalrecordMapper {
     
     public medicalrecord getData(int id);
     
-    public void updataRecord(medicalrecord record);
+    public void savaRecord(medicalrecord record);
     
 }
