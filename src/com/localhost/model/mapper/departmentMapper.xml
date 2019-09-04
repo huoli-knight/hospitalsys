@@ -60,4 +60,20 @@
       </if>
     </trim>
   </insert>
+  
+   <select id="getregisterdept" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	department de
+  </select>
+  
+  <select id="getdepartmentid"  parameterType="java.lang.String" resultType="INTEGER">
+  SELECT
+	department.ID
+  FROM
+	department
+  WHERE
+    department.DeptName=#{name}
+  </select>
 </mapper>

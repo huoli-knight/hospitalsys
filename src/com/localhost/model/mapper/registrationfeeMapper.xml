@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.localhost.model.mapper.registrationfeeMapper">
+  <resultMap id="BaseResultMap" type="com.localhost.model.po.registrationfee">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="MedicalID" jdbcType="INTEGER" property="medicalid" />
+    <result column="RegistID" jdbcType="INTEGER" property="registid" />
+    <result column="ItemID" jdbcType="INTEGER" property="itemid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Objective" jdbcType="VARCHAR" property="objective" />
+    <result column="Position" jdbcType="VARCHAR" property="position" />
+    <result column="IsUrgent" jdbcType="INTEGER" property="isurgent" />
+    <result column="Num" jdbcType="INTEGER" property="num" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="DoctorID" jdbcType="INTEGER" property="doctorid" />
+    <result column="CheckOperID" jdbcType="INTEGER" property="checkoperid" />
+    <result column="ResultOperID" jdbcType="INTEGER" property="resultoperid" />
+    <result column="CheckTime" jdbcType="TIMESTAMP" property="checktime" />
+    <result column="Result" jdbcType="VARCHAR" property="result" />
+    <result column="ResultTime" jdbcType="TIMESTAMP" property="resulttime" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="RecordType" jdbcType="INTEGER" property="recordtype" />
+    <result column="ItemName" jdbcType="VARCHAR" property="itemname" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+  
+  
+  <select id="getregisterfee"  parameterType="INTEGER" resultMap="BaseResultMap">
+  SELECT
+	ch.*,fm.ItemName,fm.Price
+  FROM
+	 checkapply ch,
+	 fmeditem fm
+  WHERE
+	ch.RegistID=#{id}
+	and fm.ID=ch.ItemID
+  </select>
+  
+  <update id="registerfeetstate" parameterType="INTEGER">
+  	UPDATE checkapply
+    SET State = 3
+    WHERE
+	checkapply.RegistID =
+	       (SELECT register.ID
+            FROM register
+            WHERE register.CaseNumber =#{id})
+            and checkapply.State=2
+  </update>
+  
+  <update id="registerrefundtstate" parameterType="INTEGER">
+  	UPDATE checkapply
+    SET State = 6
+    WHERE
+	checkapply.RegistID =
+	       (SELECT register.ID
+            FROM register
+            WHERE register.CaseNumber =#{id})
+            and checkapply.State=3
+  </update>
+</mapper>

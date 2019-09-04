@@ -63,6 +63,9 @@ public class OutpatientServiceImpl implements OutpatientService {
 			result += "," + getSplicingString("number" + i, "" + sumNumber[i]);
 		}
 		result += "}";
+		for (int i = 0; i < sumNumber.length; i++) {
+			sumNumber[i] = 0;
+		}
 		return result;
 	}
 	

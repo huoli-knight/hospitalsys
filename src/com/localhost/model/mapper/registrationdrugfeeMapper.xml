@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.localhost.model.mapper.registrationdrugfeeMapper">
+  <resultMap id="BaseResultMap" type="com.localhost.model.po.registrationdrugfee">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="MedicalID" jdbcType="INTEGER" property="medicalid" />
+    <result column="RegistID" jdbcType="INTEGER" property="registid" />
+    <result column="ItemID" jdbcType="INTEGER" property="itemid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Objective" jdbcType="VARCHAR" property="objective" />
+    <result column="Position" jdbcType="VARCHAR" property="position" />
+    <result column="IsUrgent" jdbcType="INTEGER" property="isurgent" />
+    <result column="Num" jdbcType="INTEGER" property="num" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="DoctorID" jdbcType="INTEGER" property="doctorid" />
+    <result column="CheckOperID" jdbcType="INTEGER" property="checkoperid" />
+    <result column="ResultOperID" jdbcType="INTEGER" property="resultoperid" />
+    <result column="CheckTime" jdbcType="TIMESTAMP" property="checktime" />
+    <result column="Result" jdbcType="VARCHAR" property="result" />
+    <result column="ResultTime" jdbcType="TIMESTAMP" property="resulttime" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="RecordType" jdbcType="INTEGER" property="recordtype" />
+    <result column="ItemName" jdbcType="VARCHAR" property="itemname" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="DrugsName" jdbcType="VARCHAR" property="drugsname" />
+    <result column="DrugsPrice" jdbcType="DECIMAL" property="drugsprice" />
+    <result column="Amount" jdbcType="DECIMAL" property="amount" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  
+  
+  <select id="getregisterdrugfee"  parameterType="INTEGER" resultMap="BaseResultMap">
+  SELECT
+	pre.*,dr.DrugsName,dr.DrugsPrice,pred.Amount,pred.State
+  FROM
+	 prescription pre,
+	 drugs dr,
+	 prescriptiondetailed pred
+  WHERE
+	pre.RegistID=#{id}
+	and dr.ID=pre.MedicalID
+	and pred.PrescriptionID=pre.ID
+  </select>
+  
+  <update id="registerfeetstate" parameterType="INTEGER">
+  	UPDATE prescriptiondetailed
+    SET State = 3
+    WHERE
+	prescriptiondetailed.prescriptionID in (
+		SELECT
+			prescription.ID
+		FROM
+			prescription
+		WHERE
+			prescription.RegistID in (
+				SELECT
+					register.ID
+				FROM
+					register
+				WHERE
+					register.CaseNumber = #{id})
+			)
+		AND prescriptiondetailed.State = 2
+  </update>
+  
+  <update id="registerrefundtstate" parameterType="INTEGER">
+  	UPDATE prescriptiondetailed
+    SET State = 6
+    WHERE
+	prescriptiondetailed.prescriptionID in (
+		SELECT
+			prescription.ID
+		FROM
+			prescription
+		WHERE
+			prescription.RegistID in (
+				SELECT
+					register.ID
+				FROM
+					register
+				WHERE
+					register.CaseNumber = #{id})
+			)
+		AND prescriptiondetailed.State = 3
+  </update>
+</mapper>

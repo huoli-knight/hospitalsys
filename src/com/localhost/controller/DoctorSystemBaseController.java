@@ -77,9 +77,9 @@ public class DoctorSystemBaseController {
 	
 	@RequestMapping(value = "/saveIndexData", method = RequestMethod.POST)
 	@Jurisdiction(jurisdiction = 3)
-	public @ResponseBody String saveIndexData(String patientName, String data0, medicalrecord medicalRecord) {
+	public @ResponseBody String saveIndexData(String radioICD, String patientName, String data0, medicalrecord medicalRecord) {
 		String result = "true";
-		result = doctorSystemBaseService.saveIndexData(patientName, data0, medicalRecord);
+		result = doctorSystemBaseService.saveIndexData(radioICD, patientName, data0, medicalRecord);
 		return "{\"result0\":" + result + "}";
 	}
 	

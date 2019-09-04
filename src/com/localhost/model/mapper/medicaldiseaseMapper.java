@@ -16,4 +16,10 @@ public interface medicaldiseaseMapper {
     
     public Integer deleteDieaseIcd(@Param("registId") int registId, @Param("icd") String icd);
     
+    public medicaldisease findID(int registId);
+    
+    public void saveType(@Param("registId") int registId, @Param("radioICD") int radioICD);
+    
+    
+    
 }

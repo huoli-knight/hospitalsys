@@ -16,6 +16,43 @@
     <result column="LastUpdateDate" jdbcType="TIMESTAMP" property="lastupdatedate" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  <!--   kjh发药，退药查询 -->
+  <select id="getDrugsData" parameterType="String" resultMap="BaseResultMap" >
+  SELECT
+		dr.*,te.ConstantName
+	FROM
+		constantitem te,
+		drugs dr
+	WHERE
+		MnemonicCode=#{mnemoniccode} and dr.DrugsDosageID=te.ID
+  </select>
+  
+  <select id="getDrugsallData" parameterType="String" resultMap="BaseResultMap" >
+  SELECT
+		dr.*,te.ConstantName
+	FROM
+		constantitem te,
+		drugs dr
+	WHERE
+		dr.DrugsDosageID=te.ID
+  </select>
+  
+  
+    <select id="queryById" parameterType="int" resultMap="BaseResultMap" >
+  SELECT
+		*
+	FROM
+		
+		drugs 
+	WHERE
+		id=#{id}
+  </select>
+  
+  
+<delete id="deleteById"  >
+     delete from drugs where id=#{id}
+</delete>
+  
   <insert id="insert" parameterType="com.localhost.model.po.drugs">
     insert into drugs (ID, DrugsCode, DrugsName, 
       DrugsFormat, DrugsUnit, Manufacturer, 

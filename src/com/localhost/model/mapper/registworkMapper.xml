@@ -13,12 +13,12 @@
     values (#{id,jdbcType=INTEGER}, #{registerid,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
       #{endtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.localhost.model.po.registwork">
+  <insert id="insertSelective" parameterType="com.localhost.model.po.registwork" keyProperty="ID" useGeneratedKeys="true">
     insert into registwork
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
+<!--       <if test="id != null"> -->
+<!--         ID, -->
+<!--       </if> -->
       <if test="registerid != null">
         RegisterID,
       </if>
@@ -30,9 +30,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
+<!--       <if test="id != null"> -->
+<!--         #{id,jdbcType=INTEGER}, -->
+<!--       </if> -->
       <if test="registerid != null">
         #{registerid,jdbcType=INTEGER},
       </if>
@@ -44,4 +44,21 @@
       </if>
     </trim>
   </insert>
+  
+  <!--   查上次日结结束时间 -->
+<select id="getregisterdailymin" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	registwork
+  WHERE
+	registwork.EndTime = (
+		SELECT
+			MAX(registwork.EndTime)
+		FROM
+			registwork
+	)
+</select>
+  
+  
 </mapper>

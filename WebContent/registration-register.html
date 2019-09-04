@@ -16,8 +16,9 @@
 <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
-<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/defaulst/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/registration-register.css" />
 <!--[if IE 6]>
 <script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -38,15 +39,23 @@
   <i class="Hui-iconfont">&#xe68f;</i>
   </a>
 </nav>
+<div style="float:right;width:20%;text-align:left;height:30px" id="realDate"></div>
+<div style="float:right;width:80%;text-align:right;height:30px">页面访问时间：</div>
+<div style="clear:both;height:5px"></div>
+<div style="float:right;text-align:left;width:20%;height:30px" id="limit" >
+</div>
+<div style="float:right;width:80%;height:30px;text-align:right" >
+今日专家限号：
+</div>
 <article class="page-container">
 	<form action="" method="post" class="form form-horizontal" id="form-member-add">
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>发票号：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="invoicenumber" name="username" readonly="readonly">
 			</div>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;获取发票号&nbsp;&nbsp;">
+				<button name="" id="quiryinvoice" class="btn btn-primary radius" type="button">获取发票号</button>
 			</div>
 			<div class="formControls col-xs-2 col-sm-2">
 				<input class="btn btn-primary radius" type="reset" value="&nbsp;&nbsp;清空&nbsp;&nbsp;">
@@ -54,115 +63,161 @@
 			<label class="form-label col-xs-5 col-sm-5"></label>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-1 col-sm-1" style="width:12%">挂号信息</label>
+			<label class="form-label col-xs-1 col-sm-1" style="width:12%;text-align:left;padding-left:2%">挂号信息</label>
 			<label class="form-label col-xs-11 col-sm-11"></label>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>病历号：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="casenumber" name="username" readonly="readonly">
+			</div>
+			<div class="formControls col-xs-2 col-sm-2">
+				<button name="" id="refreshcase" class="btn btn-primary radius" type="button">获取病历号</button>
 			</div>
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>姓名：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Pname" name="username">
 			</div>	
 		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>性别：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<span class="select-box"><select class="select">
+				<span class="select-box"><select class="select" id="Pgender">
 					<option>男</option>
 					<option>女</option>
 				</select></span>
 			</div>
 		</div>
+		
+		<div class="row cl">
+		    <label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>出生日期：</label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmax" class="input-text Wdate" style="width:100%;">
+			</div>
+		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>年龄：</label>
 			<div class="formControls col-xs-1 col-sm-1">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Page" name="username" οnkeyup="calage(this)">
 			</div>
 			<div class="formControls col-xs-1 col-sm-1">
-				<span class="select-box"><select class="select">
+				<span class="select-box" ><select class="select" id="Pagetype">
 					<option>岁</option>
 					<option>月</option>
 					<option>日</option>
 				</select></span>
 			</div>
 		</div>
-		<div class="row cl">
-		    <label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>出生日期：</label>
-			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
-			</div>
-		</div>	
+			
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>结算类型：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<span class="select-box"><select class="select">
-					<option>1</option>
-					<option>2</option>
+				<span class="select-box"><select class="select" id="paytype">
+					<option>自费</option>
+					<option>市医保</option>
 				</select></span>
 			</div>
 		</div>	
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%">身份证号：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="PIDnumber" name="username">
 			</div>
 		</div>	
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%">家庭住址：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+				<input type="text" class="input-text" value="" placeholder="" id="Phome" name="username">
 			</div>
 		</div>			
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>挂号级别：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<span class="select-box"><select class="select">
-					<option>1</option>
-					<option>2</option>
+				<span class="select-box"><select class="select" id="registerlevel">
+					<option>普通号</option>
+					<option>专家号</option>
 				</select></span>
 			</div>
 		</div>	
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>挂号科室：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<span class="select-box"><select class="select">
-					<option>1</option>
-					<option>2</option>
+				<span class="select-box"><select class="select" id="registdept">
+				
 				</select></span>
 			</div>
 		</div>	
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>看诊医生：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<span class="select-box"><select class="select">
-					<option>1</option>
-					<option>2</option>
+				<span class="select-box"><select class="select" id="doctorname">
+					
 				</select></span>
 			</div>
 		</div>	
 		<div class="row cl">
 			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>是否要病历本：</label>
 			<div class="formControls col-xs-2 col-sm-2">
-				<span class="select-box"><select class="select">
+				<span class="select-box"><select class="select" id="isneedbook">
 					<option>是</option>
 					<option>否</option>
 				</select></span>
 			</div>
-		</div>	
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>缴费方式：</label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<span class="select-box"><select class="select" id="feetype">
+					
+				</select></span>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="formControls col-xs-2 col-sm-2" style="padding-left:13%">
+				<button name="" id="confirminformation" class="btn btn-primary radius" type="button">点此提交挂号信息核对缴费金额</button>
+			</div>
+		</div>
 		<div class="row cl">
 		<label class="form-label col-xs-1 col-sm-1" style="width:12%"><span class="c-red">*</span>应收金额：</label>
 		<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
-		</div>
-		<div class="formControls col-xs-2 col-sm-2" style="padding-left:10%">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;挂号&nbsp;&nbsp;">
+				<input type="text" class="input-text" value="" placeholder="" id="amount" name="username">
 		</div>
 		</div>	
+		<div class="row cl">
+			<div class="formControls col-xs-2 col-sm-2" style="padding-left:22%">
+				<button name="" id="confirmregist" class="btn btn-primary radius" type="button">确认挂号</button>
+			</div>
+		</div>
+		<div id="hideinvoice" >
+		<div class="row cl">
+			<label class="form-label col-xs-1 col-sm-1" style="text-align:left;width:12%">发票信息</label>
+			<label class="form-label col-xs-11 col-sm-11"></label>
+		</div>
+		<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<thead>
+				<tr class="text-c">
+					<th width="80">病历号</th>
+					<th>姓名</th>
+					<th width="80">发票号</th>
+					<th width="80">发票金额</th>
+					<th width="120">创建日期</th>
+					<th width="80">发票状态</th>
+				</tr>
+			</thead>
+			<tbody id="checklist">
+				
+			</tbody>
+		</table>
+		<div class="row cl">
+			<div class="formControls col-xs-2 col-sm-2" style="padding-left:22%">
+				<button name="" id="confirmprint" class="btn btn-primary radius" type="button">打印发票</button>
+			</div>
+		</div>
+		</div>
+		</div>
 	</form>
 </article>
 
@@ -177,49 +232,8 @@
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
 <script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	
-	$("#form-member-add").validate({
-		rules:{
-			username:{
-				required:true,
-				minlength:2,
-				maxlength:16
-			},
-			sex:{
-				required:true,
-			},
-			mobile:{
-				required:true,
-				isMobile:true,
-			},
-			email:{
-				required:true,
-				email:true,
-			},
-			uploadfile:{
-				required:true,
-			},
-			
-		},
-		onkeyup:false,
-		focusCleanup:true,
-		success:"valid",
-		submitHandler:function(form){
-			//$(form).ajaxSubmit();
-			var index = parent.layer.getFrameIndex(window.name);
-			//parent.$('.btn-refresh').click();
-			parent.layer.close(index);
-		}
-	});
-});
-</script> 
+<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="js/registration-register.js"></script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
 </html>

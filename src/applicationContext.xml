@@ -64,6 +64,7 @@
 	</aop:config>
 	
 	<!-- 往spring容器中装配service的bean -->
+	<bean id="TemplateService" class="com.localhost.model.service.TemplateServiceImpl"></bean>
 	<bean id="loginService" class="com.localhost.model.service.LoginServiceImpl"></bean>
 	<bean id="constantService" class="com.localhost.model.service.ConstantServiceImpl"></bean>
 	<bean id="doctorCategoryService" class="com.localhost.model.service.DoctorCategoryServiceImpl"></bean>

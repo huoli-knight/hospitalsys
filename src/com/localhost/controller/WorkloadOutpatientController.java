@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.localhost.model.service.OutpatientService;
+import com.localhost.utils.Jurisdiction;
 
 @Controller
 @RequestMapping("/outPatient")
@@ -18,6 +19,7 @@ public class WorkloadOutpatientController {
 	private OutpatientService outpatientService;
 	
 	@RequestMapping(value  = "/getFeeData", method = RequestMethod.POST)
+	@Jurisdiction(jurisdiction = 1)
 	public @ResponseBody String getFeeData(HttpServletRequest request) {
 		return outpatientService.getoutpatient(request);
 	}

@@ -22,7 +22,39 @@
     <result column="RegisterID" jdbcType="INTEGER" property="registerid" />
     <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
   </resultMap>
+  <select id="getregisterData" parameterType="String" resultMap="BaseResultMap" >		
+		 SELECT
+		dr.*,re.CaseNumber,re.RealName,re.RegistTime,pa.Name,pa.Amount,dr.DrugsFormat,dr.Manufacturer,dr.DrugsUnit,pd.State
+	FROM
+		register re,
+		patientcosts pa,
+		drugs dr,
+        prescription pr,
+        prescriptiondetailed pd
+	WHERE
+		CaseNumber=#{casenumber} and pr.RegistID=re.ID and pd.PrescriptionID=pr.ID and dr.ID=pd.DrugsID and pa.RegistID=re.ID and pa.Name=dr.DrugsName and pa.ItemType='2' and pa.Amount>0 and pd.State in(3,4)
+  </select>
+<!--   退药 -->
+  <select id="getregisterData1" parameterType="String" resultMap="BaseResultMap" >		
+		 SELECT
+		dr.*,re.CaseNumber,re.RealName,re.RegistTime,pa.*,dr.DrugsFormat,dr.Manufacturer,dr.DrugsUnit,pd.State
+	FROM
+		register re,
+		patientcosts pa,
+		drugs dr,
+        prescription pr,
+        prescriptiondetailed pd
+	WHERE
+		CaseNumber=#{casenumber} and pr.RegistID=re.ID and pd.PrescriptionID=pr.ID and dr.ID=pd.DrugsID and pa.RegistID=re.ID and pa.Name=dr.DrugsName and pa.ItemType='2' and pd.State in(5,4) and pa.Amount>0 
+  </select>
+  <update id="toY">
+ 
+UPDATE `prescriptiondetailed` SET State = 4 WHERE DrugsId=#{id,jdbcType=INTEGER}
+  </update>
+  <update id="returndrugs">
+  UPDATE `prescriptiondetailed` SET State = 5 WHERE DrugsId=#{id,jdbcType=INTEGER}
   
+  </update>
   <select id="getNumberOfVisits" resultType="Integer">
   SELECT
 	count(*)
@@ -68,7 +100,7 @@
 		and TIMESTAMP(RegistTime) between TIMESTAMP('${startTime}') and TIMESTAMP('${endTime}')
   </select>
   
-  <select id="getCaseNumber" parameterType="String" resultType="int">
+  <select id="getCaseNumber" parameterType="int" resultType="String">
   	select CaseNumber
   	from register
   	where ID = #{ID}
@@ -226,4 +258,38 @@
       </if>
     </trim>
   </insert>
+  
+  <select id="getregistercasenumber" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	 register re
+  WHERE
+	re.CaseNumber= (
+		SELECT
+			MAX(register.CaseNumber)
+		FROM
+			register
+	)
+  </select>
+  
+  <select id="getregisterinformation"  parameterType="INTEGER" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	 register re
+  WHERE
+	re.CaseNumber=#{id}
+  </select>
+  
+  <select id="getregisterlimit"  parameterType="Date" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	 register re
+  WHERE
+	re.VisitDate=#{time}
+	and RegistLeID=1
+  </select>
+  
 </mapper>

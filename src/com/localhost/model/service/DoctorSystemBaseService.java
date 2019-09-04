@@ -23,6 +23,6 @@ public interface DoctorSystemBaseService {
 	
 	public int deleteICDData(int medicalDiseaseId, String icd);
 	
-	public String saveIndexData(String patientName, String data0, medicalrecord medicalRecord);
+	public String saveIndexData(String radioICD, String patientName, String data0, medicalrecord medicalRecord);
 	
 }

@@ -58,4 +58,22 @@
       </if>
     </trim>
   </insert>
+  
+   <select id="getfeetypeid"  parameterType="String" resultType="int">
+  SELECT
+	constantitem.ID
+  FROM
+	constantitem
+  WHERE
+    ConstantName like '${value}'
+  </select>
+  
+  <select id="getregisterfeetypename" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	constantitem
+  WHERE
+	constantitem .ConstantTypeID = 5
+  </select>
 </mapper>

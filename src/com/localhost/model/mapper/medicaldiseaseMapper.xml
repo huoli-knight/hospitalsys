@@ -11,6 +11,20 @@
     <result column="DiagnoseCate" jdbcType="INTEGER" property="diagnosecate" />
   </resultMap>
     
+    
+    
+    <update id="saveType" parameterType="int">
+  	update medicalrecord set 
+  			DiagnoseType = #{radioICD},
+	where RegistID = #{registid}
+  </update>
+    
+    <select id="findID" parameterType="int" resultMap="BaseResultMap">
+  	select *
+  		from medicaldisease
+  		where RegistID = #{registId}
+  </select>
+    
   <delete id="deleteDieaseIcd">
   	delete
   	from medicaldisease
@@ -28,7 +42,7 @@
   
   <select id="getDiagnosisType" parameterType="int" resultType="int">
 	SELECT
-		AVG(md.DiagnoseCate)
+		AVG(md.DiagnoseType)
 	FROM
 		medicaldisease md
 	WHERE
@@ -44,12 +58,9 @@
       #{diseaseid,jdbcType=INTEGER}, #{diagnosetype,jdbcType=INTEGER}, #{getsiskdate,jdbcType=TIMESTAMP}, 
       #{diagnosecate,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.localhost.model.po.medicaldisease">
+  <insert id="insertSelective" parameterType="com.localhost.model.po.medicaldisease"  keyProperty="ID" useGeneratedKeys="true">
     insert into medicaldisease
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
       <if test="medicalid != null">
         MedicalID,
       </if>

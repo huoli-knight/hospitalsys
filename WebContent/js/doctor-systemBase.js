@@ -75,6 +75,9 @@ $(function(){
 	var patientName = parent.document.getElementById("tree_id").value;
 	
 	if (patientName.length >= 3) {
+		if (patientName[1] == "2") {
+			patientName=patientName.substring(2, patientName.length);
+		}
 		if (patientName[1] == "1") {
 			$("#buttonTemporaryStorage").css("display","none");
 			patientName=patientName.substring(2, patientName.length);
@@ -166,10 +169,10 @@ $(function(){
 		var time = new Date();
 		var icd = $("#sumbut0").val();
 		var radioICD = "";
-		if ($("#radioICD0").attr("checked")) {
-			radioICD = "1";
-		} else if ($("#radioICD1").attr("checked")) {
-			radioICD = "2";
+		var item = $(":radio:checked");
+		var len = item.length;
+		if (len > 0) {
+			radioICD = $(":radio:checked").val();
 		} else {
 			alert("请选择诊断类型！");
 			return;
@@ -258,18 +261,29 @@ $(function(){
 	function saveIndexData(data0) {
 		var readme = $("#readme").val();
 		var present= $("#present").val();
-		var presenttreat= $("#presenttreat").val();
+		var presenttreat= $("#presentTreat").val();
 		var history= $("#history").val();
 		var allergy= $("#allergy").val();
 		var physique= $("#physique").val();
 		var proposal= $("#proposal").val();
 		var careful= $("#careful").val();
+		var icd = $("#sumbut0").val();
+		var radioICD = "";
+		var item = $(":radio:checked");
+		var len = item.length;
+		if (len > 0) {
+			radioICD = $(":radio:checked").val();
+		} else {
+			alert("请选择诊断类型！");
+			return;
+		}
 		$.ajax({
 			type:"post",
 			url:"doctorBase/saveIndexData",
 			dataType:"json",
 			async:true,
 			data: {
+				radioICD:radioICD,
 				patientName:patientName,
 				data0:data0,
 				readme:readme,

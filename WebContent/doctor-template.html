@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="css/doctor-template.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="static/h-ui.admin/css/style.css" />
+
+
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+
+<![endif]-->
+<title>常数类别管理</title>
+</head>
+<body>
+
+<div id="popUp">
+	<div class="popUpleft"></div>
+    <div class="popUpmiddle" id="popUpData">
+    	<br/><br/>
+		<p>模板名称1：<input type="text" class="name"></p>
+		<p>范围：请输入对应的数字：1-个人,2-科室,3-全院<input type="text" class="scope"></p>
+		<p>类型：请输入对应的数字：1-检查,2-检验,3-处置<input type="text" class="recordtype"></p>
+		<p><input type="button" value="提交" id="submit">
+		<input type="button" value="取消" id="cancel"></p>
+		<span id="addTips"></span>
+	</div>
+    <div class="popUpright"></div>
+</div>
+
+<div id="popUp2">
+	<div class="popUpleft"></div>
+    <div class="popUpmiddle" id="popUpData">
+    	<br/><br/>
+		<p id="p1">模板名称：</p>
+		<p id="p4">创建时间：</p>
+		<p id="p2">范围：对应的数字：1-个人,2-科室,3-全院</p>
+		<p id="p3">类型：对应的数字：1-检查,2-检验,3-处置</p>
+		<p><input type="button" value="保存" id="save">
+		<input type="button" value="取消" id="cancel2">
+		<input type="button" value="删除" id="delete" color="red"></p>
+		<div class="cl pd-5 bg-1 bk-gray mt-20">
+	<span class="l" id = "spanstype0">共有数据：<span id = "datanumber2"> </span>条</span> 
+	<span class="r" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe600;</i>
+	<span id="addition2">新增项目 &nbsp;&nbsp;&nbsp;&nbsp;</span> 
+	</div>
+		<table id="setdata" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+		<thead>
+		<tr class="text-c">
+					
+					<th width="120">项目编码</th>
+					<th width="120">项目名称</th>
+					<th width="80">项目规格</th>
+					<th width="80">检查部位</th>
+					<th width="80">操作</th>
+				</tr>
+			</thead>
+			<tbody id="sysData2">
+				
+			</tbody>
+		</table>
+	</div>
+    <div class="popUpright"></div>
+</div>
+<div id="noPopUp">
+<nav class="breadcrumb" ><i class="Hui-iconfont">&#xe67f;</i> <a href="javascript:location.replace(location.href);">首页 </a><span class="c-gray en">&gt;</span> 管理 <span class="c-gray en">&gt;</span> 列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+
+<div class="page-container">
+	<div class="text-c"> 搜索方式	&nbsp;	
+	<span>范围：</span>
+		<span class="select-box inline">
+		<select id="scope" name="" class="select">
+			<option value="0" >全部</option>
+			<option value="1" >个人</option>
+			<option value="2" >科室</option>
+			<option value="3" >全院</option>
+		</select>
+		</span>
+	<span>类型：</span>
+		<span class="select-box inline">
+		<select id="recordtype" name="" class="select">
+			<option value="0" >全部</option>
+			<option value="1" >检查</option>
+			<option value="2" >检验</option>
+			<option value="3" >处置</option>
+		</select>
+		</span>
+		<span>名称：</span>
+		<input type="text" name="" id="name" placeholder=" 请输入模板名称" style="width:250px" class="input-text">
+		<button name=""  id="searchbutton" class="" type="button"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+	</div>
+	<div id="tipsDiv"><span id="tips">&nbsp;</span></div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+	<span class="l" id = "spanstype0">共有数据：<span id = "datanumber"> </span>条</span> 
+	<span class="r" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe600;</i>
+	<span id="addition">新增模板 &nbsp;&nbsp;&nbsp;&nbsp;</span> 
+	</div>
+	
+	<div class="mt-20">
+		<table id="setdata" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<thead>
+			<tr class="text-c">
+					
+					<th width="120">模板名称</th>
+					<th width="120">创建时间</th>
+					<th width="80">范围</th>
+					<th width="80">类型</th>
+				</tr>
+			</thead>
+			<tbody id="sysData">
+				
+			</tbody>
+		</table>
+	</div>			
+</div>
+</div>
+<div id="popUp3">
+	<div class="popUpleft"></div>
+    <div class="popUpmiddle" id="popUpData">
+    	<br/><br/>
+		<p>项目id<input type="text" class="code"></p>
+		<p>检查部位<input type="text" class="position"></p>
+		<p><input type="button" value="提交" id="submit2">
+		<input type="button" value="取消" id="cancel3"></p>
+		<span id="addTips"></span>
+	</div>
+    <div class="popUpright"></div>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="js/doctor-template.js"></script> 
+
+</body>
+</html>

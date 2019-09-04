@@ -10,11 +10,40 @@
     <result column="RecordType" jdbcType="INTEGER" property="recordtype" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
-  <insert id="insert" parameterType="com.localhost.model.po.checktemplate">
-    insert into checktemplate (ID, Name, UserID, 
+  <select id="getTemplateData" resultMap="BaseResultMap">
+  	SELECT
+		ID,Name,CreationTime,Scope,RecordType
+	FROM
+		checktemplate
+
+  </select>
+
+  <select id="searchTemplateData" parameterType="com.localhost.model.po.checktemplate" resultMap="BaseResultMap">
+  	SELECT
+		ID,Name,CreationTime,Scope,RecordType
+	FROM
+		checktemplate
+	WHERE
+
+ 		<if test="scope!= 0">
+          	Scope = #{scope} <if test="recordtype!= 0 or name!= ''">AND </if> 
+         </if>
+       	<if test="recordtype!= 0">
+         	RecordType= #{recordtype} <if test="name!= ''">AND </if>   
+       	</if> 
+        <if test="name!= ''"> 
+         	Name = #{name}  
+       	</if>
+
+      
+		
+
+  </select>
+  <insert id="insert" parameterType="com.localhost.model.po.checktemplate" keyProperty="ID" useGeneratedKeys="true">
+    insert into checktemplate (Name, UserID, 
       CreationTime, Scope, RecordType, 
       DelMark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
       #{creationtime,jdbcType=TIMESTAMP}, #{scope,jdbcType=CHAR}, #{recordtype,jdbcType=INTEGER}, 
       #{delmark,jdbcType=INTEGER})
   </insert>
@@ -67,4 +96,13 @@
       </if>
     </trim>
   </insert>
+  <update id="save" parameterType="com.localhost.model.po.checktemplate">
+    UPDATE checktemplate 
+    SET Name = #{name},Scope = #{scope},RecordType= #{recordtype},CreationTime = #{creationtime}
+    WHERE ID = #{id}
+  </update>
+  <delete id="delete" parameterType="Integer">
+  	DELETE FROM checktemplate WHERE ID = #{id}
+<!--   	DELETE FROM checkrelation WHERE CheckTempID = #{id} -->
+  </delete>
 </mapper>

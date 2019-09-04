@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css"
+	href="lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css"
+	href="static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<style type="text/css">
+@charset "UTF-8";
+
+.select1 {
+	display: inline-block;
+	height: 35px;
+	width: 100px;
+	position: relative;
+	vertical-align: middle;
+	padding: 0;
+	overflow: hidden;
+	background-color: #fff;
+	color: #555;
+	border: 1px solid #aaa;
+	text-shadow: none;
+	border-radius: 4px;
+	transition: box-shadow 0.25s ease;
+	z-index: 2;
+	font-size: 16px;
+	font-family: PingFang SC;
+}
+
+div.look {
+	text-align: left;
+	padding: 20px;
+}
+
+div.screen {
+	padding: 20px;
+}
+div.screen1 {
+	padding: 20px;
+}
+.form{
+    padding:20px;
+}
+button.btn1{
+background-color: #6699CC; 
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+button.btn1:hover{
+background-color: #008CBA;
+    
+}
+button.btn2{
+background-color: #6699CC; 
+    border: 2px;
+    border-radius: 4px;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+button.btn2:hover{
+background-color: #008CBA;
+    
+}
+
+</style>
+<title>发药</title>
+</head>
+<body>
+	<nav class="breadcrumb">
+		<i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>
+		管理 <span class="c-gray en">&gt;</span> 列表 <a
+			class="btn btn-success radius r"
+			style="line-height: 1.6em; margin-top: 3px"
+			href="javascript:location.replace(location.href);" title="刷新"><i
+			class="Hui-iconfont">&#xe68f;</i></a>
+	</nav>
+	<div class="dispensing">
+		<div class="look">
+				<font size="4px" family="PingFang SC">病历号:</font> <input
+					type="text" name="" id="code" placeholder=" 请输入病历号"
+					style="width: 250px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;"
+					class="input-text">
+				<button name="" id="lookup" class="btn1" type="submit">
+					<i class="Hui-iconfont">&#xe665;</i> 搜索
+				</button>
+		</div>
+		<div class="screen">
+			
+			 <div class="screen1">
+
+			日期范围： <input type="text"
+				onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })"
+				id="logmin" class="input-text Wdate"
+				style="width: 120px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;">
+			<input type="text"
+				onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })"
+				id="logmax" class="input-text Wdate"
+				style="width: 120px; height: 35px; border: 1px solid #aaa; border-radius: 4px; transition: box-shadow 0.25s ease; z-index: 2; font-size: 16px; font-family: PingFang SC;">
+			<button name="" id="screen" class="btn2" type="submit">
+				 筛选
+			</button>
+     </div>
+     <button id="distribute" class="btn btn-success" type="submit"> 发药</button>
+		<div id="tipsDiv"><span id="tips">&nbsp;</span></div>		
+		</div>		
+		<div class="cl pd-5 bg-1 bk-gray mt-20"> 
+ 			<span class="l"> </span> <span class="r">共有数据：<span id="number"></span> 条</span>
+ 			
+ 		</div> 
+		<div class="form">
+			<table
+				class="table table-border table-bordered table-bg table-hover table-sort table-responsive" id="J_tab_fam">
+				<thead>
+					<tr class="information">
+						<th width="25"><input type="checkbox" name="" value=""></th>
+						<th width="80">病历号</th>
+						<th>姓名</th>
+						<th width="150">挂号日期</th>
+						<th width="130">药品名称</th>
+						<th width="80">药品规格</th>
+						<th width="70">药品厂家</th>
+						<th width="70">药品单价</th>
+						<th width="50">购买数量</th>
+						<th width="60">发药状态</th>
+						
+						
+					</tr>
+				</thead>
+				<tbody id="sysData">
+					
+<!-- 					<tr class="text-c"> -->
+<!-- 						<td><input type="checkbox" value="" name=""></td> -->
+<!-- 						<td>10002</td> -->
+<!-- 						<td class="text-l">李四</td> -->
+<!-- 						<td>2018-6-11 11:11:42</td> -->
+<!-- 						<td>急诊</td> -->
+<!-- 						<td>山药颗粒</td> -->
+<!-- 						<td>0.5g/10g/袋</td> -->
+<!-- 						<td>针剂</td> -->
+<!-- 						<td>10</td> -->
+<!-- 						<td class="td-status"><span -->
+<!-- 							class="label label-success radius">未发药</span></td> -->
+<!-- 						<td class="f-14 td-manage"> -->
+<!-- 							<button name="" id="distribute" class="btn btn-success" type="submit"> -->
+<!-- 								发药</button> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--_footer 作为公共模版分离出去-->
+	<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+	<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+	<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+	<!--/_footer 作为公共模版分离出去-->
+
+	<!--请在下方写此页面业务相关的脚本-->
+	<script type="text/javascript"
+		src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
+	<script type="text/javascript"
+		src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+	<script type="text/javascript">
+// $('.table-sort').dataTable({
+// 	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+// 	"bStateSave": true,//状态保存
+// 	"pading":false,
+// 	"aoColumnDefs": [
+// 	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+// 	  {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
+// 	]
+// });
+
+</script>
+<script type="text/javascript" src="js/Pharmacy-Dispensing.js"></script>
+</body>
+</html>

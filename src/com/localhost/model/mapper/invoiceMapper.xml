@@ -23,12 +23,12 @@
       #{registid,jdbcType=INTEGER}, #{feetype,jdbcType=INTEGER}, #{back,jdbcType=VARCHAR}, 
       #{dailystate,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.localhost.model.po.invoice">
+  <insert id="insertSelective" parameterType="com.localhost.model.po.invoice" keyProperty="ID" useGeneratedKeys="true">
     insert into invoice
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
+<!--       <if test="id != null"> -->
+<!--         ID, -->
+<!--       </if> -->
       <if test="invoicenum != null">
         InvoiceNum,
       </if>
@@ -90,4 +90,73 @@
       </if>
     </trim>
   </insert>
+  
+<!--   获取发票号 -->
+  <select id="getinvoicenum" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	invoice inv
+  WHERE
+	inv.InvoiceNum= (
+		SELECT
+			MAX(invoice.InvoiceNum)
+		FROM
+			invoice
+	)
+  </select>
+  
+<!--   根据registID查发票信息 -->
+  <select id="getregisterinvoiceinformation" parameterType="INTEGER" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	invoice
+  WHERE
+	invoice.registID = #{id}
+  </select>
+  
+
+
+<!--   日结 -->
+<select id="getregisterreport"  parameterType="Date" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	 invoice inv
+  WHERE
+	inv.CreationTime>=#{time}
+  </select>
+  
+<!-- 更新日结 -->
+  <update id="registercloseaccount" >
+  	UPDATE invoice
+    SET DailyState =1
+    WHERE
+    invoice.DailyState=0
+  </update>
+
+<!--   发票打印修改状态为已打印4 -->
+  <update id="registerimmediatelyprintstate" parameterType="INTEGER">
+  	UPDATE invoice
+    SET State = 4
+    WHERE
+	invoice.RegistID =
+	       (SELECT register.ID
+            FROM register
+            WHERE register.CaseNumber =#{id})
+            and invoice.State=3
+  </update>
+    
+<!--   发票打印修改状态为已补打6 -->
+  <update id="registerprintstate" parameterType="INTEGER">
+  	UPDATE invoice
+    SET State = 6
+    WHERE
+	invoice.RegistID =
+	       (SELECT register.ID
+            FROM register
+            WHERE register.CaseNumber =#{id})
+            and invoice.State=3
+  </update>
 </mapper>

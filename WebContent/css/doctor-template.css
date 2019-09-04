@@ -1,0 +1,81 @@
+#sysData td.titletype {
+	background:#CCCCCC;
+	font-size:15px;
+	font-weight:bold;
+	border-radius:10px;
+}
+
+#tipsDiv {
+	text-align: center;
+}
+
+#noPopUp {
+	position: absolute;
+	width:100%;
+}
+
+#popUp {
+	display:none;
+	position: relative;
+	float:left;
+	top:20px;
+	height:200px;
+	width:100%;
+	z-index:99;
+}
+
+#popUp2 div{
+	width:100%;
+	height:100%;
+	float:left;
+}
+#popUp2 {
+	display:none;
+	position: relative;
+	float:left;
+	top:20px;
+	height:100%;
+	width:100%;
+	z-index:99;
+}
+
+#popUp3 div{
+	width:100%;
+	height:100%;
+	float:left;
+}
+#popUp3 {
+	display:none;
+	position: relative;
+	float:left;
+	top:20px;
+	height:100%;
+	width:100%;
+	z-index:99;
+}
+#popUp div{
+	width:33%;
+	height:100%;
+	float:left;
+}
+.popUpleft{
+	background-color:#ffffff;
+	visibility:hidden;
+}
+.popUpmiddle{
+	background-color:#CCCCCC;
+	text-align: center;
+}
+.popUpright{
+	background-color:#ffffff;
+	visibility:hidden;
+}
+
+#submit,#cancel{
+	width:49%;
+	height:30px;
+}
+#save,#cancel2,#delete{
+	width:10%;
+	height:30px;
+}

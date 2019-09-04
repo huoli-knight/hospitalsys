@@ -97,4 +97,22 @@
       </if>
     </trim>
   </insert>
+  
+  <select id="getregisterdoctor" resultMap="BaseResultMap">
+  SELECT
+	*
+  FROM
+	USER
+  WHERE
+	USER .UseType = 3
+  </select>
+  
+  <select id="getuserid"  parameterType="java.lang.String" resultType="INTEGER">
+  SELECT
+	USER.ID
+  FROM
+	USER
+  WHERE
+    USER.RealName=#{name}
+  </select>
 </mapper>

@@ -74,18 +74,36 @@ public class DoctorSystemBaseServiceImpl implements DoctorSystemBaseService {
 	}
 
 	@Override
-	public String saveIndexData(String patientName, String data0, medicalrecord medicalRecord) {
+	public String saveIndexData(String radioICD, String patientName, String data0, medicalrecord medicalRecord) {
+		medicalRecord.setCasestate(Integer.parseInt(data0));
 		if (medicalRecordMapper.getData(Integer.parseInt(patientName)) == null) {
 			medicalRecord.setRegistid(Integer.parseInt(patientName));
+			if (registermapper0.getCaseNumber(Integer.parseInt(patientName)) == null) {
+				return "false";
+			}
 			medicalRecord.setCasenumber(registermapper0.getCaseNumber(Integer.parseInt(patientName)));
 			if (medicalRecordMapper.insertSelective(medicalRecord) != 0) {
+				saveType(Integer.parseInt(radioICD), Integer.parseInt(patientName));
 				return "true";
 			}
 			return "false";
 		}
 		medicalRecord.setRegistid(Integer.parseInt(patientName));
-		medicalRecordMapper.updataRecord(medicalRecord);
+		medicalRecordMapper.savaRecord(medicalRecord);
+		saveType(Integer.parseInt(radioICD), Integer.parseInt(patientName));
 		return "true";
 	}
 	
+	private void saveType(int radioICD, int registId) {
+		if (medicalDiseaseMapper.findID(registId) != null) {
+			return;
+		}
+		medicaldisease medicaldisease0 = new medicaldisease();
+		medicaldisease0.setRegistid(registId);
+		medicaldisease0.setMedicalid(medicalRecordMapper.getData(registId).getId());
+		medicaldisease0.setDiagnosetype(radioICD);
+		medicaldisease0.setDiseaseid(-1);
+		medicaldisease0.setDiagnosecate(1);
+		medicalDiseaseMapper.insertSelective(medicaldisease0);
+	}
 }
