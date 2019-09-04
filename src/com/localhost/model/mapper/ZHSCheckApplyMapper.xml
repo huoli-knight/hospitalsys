@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.localhost.model.mapper.ZHSCheckApplyMapper">
+
+	<select id="findCheckApplyByRid" parameterType="hashMap" resultType="ZHSCheckApply">
+		select checkapply.*
+		from checkapply
+		where checkapply.RegistID = #{Rid} and checkapply.RecordType = #{RecordType} and checkapply.State > #{State}
+	</select>
+	
+	<update id="refreshStateByRid" parameterType="hashMap">
+		update checkapply
+		set checkapply.State = #{new_State}
+		where checkapply.RegistID = #{Rid} and checkapply.State = #{old_State}
+	</update>
+	
+	<update id="refreshResult" parameterType="ZHSCheckApply">
+		update checkapply
+		set checkapply.State = #{State}, checkapply.CheckOperID = #{CheckOperID}, checkapply.ResultOperID = #{ResultOperID}, checkapply.CheckTime = #{CheckTime}, checkapply.ResultTime = #{ResultTime}, checkapply.Result = '${Result}'
+		where checkapply.ID = #{ID}
+	</update>
+	
+</mapper>

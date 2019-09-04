@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <script src="static/ZHSjs/manage.js"></script>
+
+    <style type="text/css">
+        @media (min-width : 1200px) {
+            .container {
+                max-width: 1500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+<!--         <div class="py-3 text-center m-auto text-white bg-dark rounded"> -->
+<!--             <h2>医技项目管理</h2> -->
+<!--         </div> -->
+        <div class="py-4 bg-white"></div>
+        <div class="row">
+            <div id="create" class="col-md-9">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary">
+                        <h4>新建项目</h4>
+                    </div>
+                    <div class="card-body text-black " style="font-size: 16px">
+                        <form id="create_Fmeditem">
+                            <input name="DelMark" type="hidden" value="1">
+                            <input id="fmeditem_cdate" name="CreationDate" type="hidden">
+                            <input id="fmeditem_ldate" name="LastUpdateDate" type="hidden">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目编码</div>
+                                        <input name="ItemCode" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目编码" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目名称</div>
+                                        <input name="ItemName" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目名称" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目规格</div>
+                                        <input name="Format" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目规格" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目单价</div>
+                                        <input name="Price" class="col-md-7 form-control" type="number"
+                                            placeholder="输入项目单价" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">助记码</div>
+                                        <input name="MnemonicCode" class="col-md-7 form-control" type="text"
+                                            placeholder="输入拼音助记码" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目类型</div>
+                                        <select name="RecordType" class="form-control col-md-7">
+                                            <option value="1">检查</option>
+                                            <option value="2">检验</option>
+                                            <option value="3">处置</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">费用科目</div>
+                                        <select name="ExpClassID" class="form-control col-md-7">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">执行科室</div>
+                                        <select name="DeptID" class="form-control col-md-7">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="py-2"></div>
+                        <div>
+                            <button id="creat_button" type="button" class="btn btn-sm btn-primary" style="float: right"
+                                onclick="createFmeditem()">新建项目</button>
+                        </div>
+                        <div class="py-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="update" class="col-md-9" hidden>
+                <div class="card border-warning">
+                    <div class="card-header bg-warning">
+                        <h4>修改项目</h4>
+                    </div>
+                    <div class="card-body text-black " style="font-size: 16px">
+                        <form id="update_Fmeditem">
+                            <input id="fmeditem_id" name="ID" type="hidden">
+                            <input name="DelMark" type="hidden" value="1">
+                            <input id="fmeditem_cdate" name="CreationDate" type="hidden">
+                            <input id="fmeditem_ldate" name="LastUpdateDate" type="hidden">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目编码</div>
+                                        <input id="itemCode" name="ItemCode" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目编码" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目名称</div>
+                                        <input id="itemName" name="ItemName" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目名称" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目规格</div>
+                                        <input id="format" name="Format" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目规格" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目单价</div>
+                                        <input id="price" name="Price" class="col-md-7 form-control" type="text"
+                                            placeholder="输入项目单价" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">助记码</div>
+                                        <input id="mnemonicCode" name="MnemonicCode" class="col-md-7 form-control"
+                                            type="text" placeholder="输入拼音助记码" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">项目类型</div>
+                                        <select id="recordType" name="RecordType" class="form-control col-md-7">
+                                            <option value="1">检查</option>
+                                            <option value="2">检验</option>
+                                            <option value="3">处置</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-2"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">费用科目</div>
+                                        <select id="expClassID" name="ExpClassID" class="form-control col-md-7">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-3 nav flex-column justify-content-center">执行科室</div>
+                                        <select id="deptID" name="DeptID" class="form-control col-md-7">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="py-2"></div>
+                        <div style="float: right">
+                            <button id="up_button" type="button" class="btn btn-sm btn-warning"
+                                onclick="setchangeurl()">修改项目</button>
+                            <button class="btn btn-sm bg-white" type="button" disabled></button>
+                            <button id="can_btn" class="btn btn-sm btn-danger" type="button"
+                                onclick="reset()">放弃修改</button>
+                        </div>
+                        <div class="py-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger">
+                        <h4>查询项目</h4>
+                    </div>
+                    <div class=" card-body text-black" style="font-size: 16px">
+                        <h4>选择查询方式</h4>
+                        <div class="py-2"></div>
+                        <form id="searchMethod">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input id="search_templatename_checkbox" type="checkbox"
+                                            onclick="myfunc1('search_templatename_checkbox','data0',0)">项目名称
+                                    </div>
+                                </div>
+                                <input id="data0" name="ItemName" type="text" class="form-control" placeholder="项目名称"
+                                    disabled="disabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input id="search_templaterange_checkbox" type="checkbox"
+                                            onclick="myfunc1('search_templaterange_checkbox','data1',1)">项目编码
+                                    </div>
+                                </div>
+                                <input id="data1" name="ItemCode" type="text" class="form-control" placeholder="项目编码"
+                                    disabled="disabled">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input id="search_templateoption_checkbox" type="checkbox"
+                                            onclick="myfunc1('search_templateoption_checkbox','data2',2)">项目类型
+                                    </div>
+                                </div>
+                                <select id="data2" name="RecordType" class="form-control" disabled="disabled">
+                                    <option value="1">检查</option>
+                                    <option value="2">检验</option>
+                                    <option value="3">处置</option>
+                                </select>
+                            </div>
+                        </form>
+                        <div>
+                            <button id="sea_btn" type="button" class="btn btn-sm btn-danger" style="float: right"
+                                onclick="searchFmeditem()" disabled>查找项目</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="py-2"></div>
+        <div class="card border-info">
+            <div class="card-header bg-info">
+                <h4>项目列表</h4>
+            </div>
+            <div class="card-body">
+                <div class="py-2"></div>
+                <div class="row m-auto">
+                    <table class="table table-bordered table-striped rounded">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>项目编码</th>
+                                <th>项目名称</th>
+                                <th>规格</th>
+                                <th>单价</th>
+                                <th>费用科目</th>
+                                <th>执行科室</th>
+                                <th>助记码</th>
+                                <th>创建时间</th>
+                                <th>修改时间</th>
+                                <th>项目类型</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Fmeditem_list">
+                        </tbody>
+                    </table>
+                </div>
+                <div style="float:right">
+                    <button id="cha_btn" class="btn btn-sm btn-primary" type="button" onclick="change()"
+                        disabled>修改项目</button>
+                    <button class="btn btn-sm bg-white" type="button" disabled></button>
+                    <button id="del_btn" class="btn btn-sm btn-danger" type="button" onclick="setdeleteurl()"
+                        disabled>删除项目</button>
+                </div>
+            </div>
+        </div>
+        <div class="py-2"></div>
+        <div class="card border-success">
+            <div class="card-header bg-success">
+                <h4>项目操作</h4>
+            </div>
+            <div class="card-body">
+                <div class="col-auto">
+                    <h4>说明:</h4>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col-auto nav flex-column justify-content-center">
+                                <b>项目导出：</b>
+                            </div>
+                            <div class="col-auto nav flex-column justify-content-center">
+                                将数据库中已存在的医技项目导出为data.json文件，存储路径为
+                            </div>
+                            <input id="path" class=" col-md-2 form-control" type="text" value="E:/">
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="dataexport()">项目导出</button>
+                            </div>
+                        </div>
+                        <div class="py-2"></div>
+                        <div class="row">
+                            <div class="col-auto nav flex-column justify-content-center">
+                                <b>项目导入：</b>
+                            </div>
+                            <div class="col-auto nav flex-column justify-content-center">
+                                选择已导出的json文件，将json内医技的项目添加到数据库中
+                            </div>
+                            <div class="row col-md-4" style="float: right">
+                                <div class="col-md-8">
+                                    <input id="datafile" class="form-control-file" type="file" accept=".json">
+                                </div>
+                                <div class="col-md-4">
+                                    <button id="imp_btn" type="button" class="btn btn-sm btn-danger"
+                                        onclick="dataimport()" disabled>项目导入</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="py-2"></div>
+<!--         <div class="py-3 text-center m-auto text-white bg-dark rounded"> -->
+<!--             <h2>医技项目管理</h2> -->
+<!--         </div> -->
+    </div>
+
+</body>
+
+</html>
